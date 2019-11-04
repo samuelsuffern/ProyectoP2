@@ -9,7 +9,7 @@ public class Partida {
 	private Pareja pareja2 = new Pareja();
 	private Jugador jugMano;
 	private Pareja ganadores;
-	private int partidas = 0;
+	private int jugadas = 0;
 	
 	// Prueba mano
 	
@@ -21,55 +21,55 @@ public class Partida {
 		listaJug.addLast(pareja2.getJug2());
 
 		Jugador sigMano = null;
-		partidas = partidas +1;
+		jugadas = jugadas +1;
 		
 		
-		if (partidas == 1) {
+		if (jugadas == 1) {
 			int mano =(int)(Math.random() * ((3) + 1)) + 0;	
 			jugMano = listaJug.get(mano);
-			System.out.println("NULLPartida nº: " + partidas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
+			System.out.println("NULLPartida nº: " + jugadas + " - Primera mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
 			
 		} else {
 			
 			Integer idMano = jugMano.getId();
-			System.out.println("Partida nº: " + partidas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
+			System.out.println("Partida nº: " + jugadas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
 
 			
-				if ( partidas % 2 == 0) {
-					for(Jugador jug : listaJug){
-						if(jug.getId() == idMano ){
-							if(!jug.getPareja().equals(jugMano.getPareja())){
+			if ( jugadas % 2 == 0) {
+				for(Jugador jug : listaJug){
+					if(jug.getId() == idMano && !jug.getPareja().equals(jugMano.getPareja())){
+						
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
 							
-							
-								sigMano = jug;
-								System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							}
-						}
 					}
+				}
 					//mapa.get(jugMano.getId())
-					for(Jugador jug : listaJug){
-						if(jug.getId() != idMano ){
-							if(!jug.getPareja().equals(jugMano.getPareja())){
+			}else{
+
+				for(Jugador jug : listaJug){
+					if(jug.getId() != idMano && !jug.getPareja().equals(jugMano.getPareja())){							
 							
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
 							
-								sigMano = jug;
-								System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							}
-						}
 					}
-				
+				}
 			}
-			
-			
 			jugMano = sigMano;
+
 		}
+			
+			
+	}
+	
 		
 
 		
 		
 		
 		
-	}
+	
 
 	/*
 	 * Getters & Setters
