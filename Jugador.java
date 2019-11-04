@@ -4,26 +4,18 @@ public class Jugador {
 	 private Integer id;
 	    private String nombre;
 	    private Baraja mano = new Baraja(); 
-	    private String parejaString; 
-	    private String clave;
+	    private Pareja miPareja; 
 
-	    
-	    public String getClave() {
-			return clave;
-		} 
-	    public void setClave() {
-	    	this.clave = nombre + "" +parejaString;
-	    }
 
 		/*
 	     * Getters & Setters
 	     */
-	    public String getParejaString() {
-			return parejaString;
+	    public Pareja getPareja() {
+			return miPareja;
 		}
 
-		public void setParejaString(String parejaString) {
-			this.parejaString = parejaString;
+		public void setPareja(Pareja pareja) {
+			this.miPareja = pareja;
 		}
 
 		public void setId(Integer id){
