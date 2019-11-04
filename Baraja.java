@@ -142,7 +142,7 @@ public class Baraja {
 				System.out.print(c.getId() + "" + c.getPalo() + " - ");
 
 			}
-			System.out.print(j.getClave() + "\n");
+			
 			
 		}
 		 

@@ -19,27 +19,52 @@ public class Partida {
 		listaJug.addLast(pareja1.getJug2());
 		listaJug.addLast(pareja2.getJug1());
 		listaJug.addLast(pareja2.getJug2());
+
+		Jugador sigMano = null;
+		partidas = partidas +1;
 		
 		
-		
-		if (jugMano == null) {
-			partidas = partidas +1;
+		if (partidas == 1) {
 			int mano =(int)(Math.random() * ((3) + 1)) + 0;	
 			jugMano = listaJug.get(mano);
+			System.out.println("NULLPartida nº: " + partidas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
 			
 		} else {
-			partidas = partidas +1;
-			Integer idMano = jugMano.getId();
 			
-			if ( !pareja1.equals(jugMano.getPareja()) ) {
+			Integer idMano = jugMano.getId();
+			System.out.println("Partida nº: " + partidas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
+
+			
 				if ( partidas % 2 == 0) {
+					for(Jugador jug : listaJug){
+						if(jug.getId() == idMano ){
+							if(!jug.getPareja().equals(jugMano.getPareja())){
+							
+							
+								sigMano = jug;
+								System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
+							}
+						}
+					}
 					//mapa.get(jugMano.getId())
-				}
+					for(Jugador jug : listaJug){
+						if(jug.getId() != idMano ){
+							if(!jug.getPareja().equals(jugMano.getPareja())){
+							
+							
+								sigMano = jug;
+								System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
+							}
+						}
+					}
+				
 			}
 			
 			
+			jugMano = sigMano;
 		}
 		
+
 		
 		
 		
@@ -102,27 +127,32 @@ public class Partida {
 		for (Integer i = 1; i < 5; i++) {
 			Jugador jugador = new Jugador();
 
-			jugador.setId(i);
-
+			
 			switch (i) {
 			case 1:
+				jugador.setId(1);
 				jugador.setNombre("J1");
 				jugador.setPareja(pareja1);
 				pareja1.setJug1(jugador);
 
 				break;
 			case 2:
+			jugador.setId(2);
+
 				jugador.setNombre("J2");
 				jugador.setPareja(pareja1);
 				pareja1.setJug2(jugador);
 				break;
 
 			case 3:
+			jugador.setId(1);
+
 				jugador.setNombre("J1");
 				jugador.setPareja(pareja2);
 				pareja2.setJug1(jugador);
 				break;
 			case 4:
+				jugador.setId(2);
 				jugador.setNombre("J2");
 				jugador.setPareja(pareja2);
 				pareja2.setJug2(jugador);
