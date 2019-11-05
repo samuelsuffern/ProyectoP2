@@ -118,7 +118,7 @@ public class Baraja {
 			// partida.ficheroSalida("Repartir <" + n + "> cartas: Ejecución OK");
 
 		}
-
+		
 		return barajajug;
 
 	}
@@ -145,6 +145,7 @@ public class Baraja {
 			
 			
 		}
+		
 		 
 	}
 

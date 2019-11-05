@@ -10,66 +10,6 @@ public class Partida {
 	private Jugador jugMano;
 	private Pareja ganadores;
 	private int jugadas = 0;
-	
-	// Prueba mano
-	
-	public void generarMano() {
-		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
-		listaJug.addLast(pareja1.getJug1());
-		listaJug.addLast(pareja1.getJug2());
-		listaJug.addLast(pareja2.getJug1());
-		listaJug.addLast(pareja2.getJug2());
-
-		Jugador sigMano = null;
-		jugadas = jugadas +1;
-		
-		
-		if (jugadas == 1) {
-			int mano =(int)(Math.random() * ((3) + 1)) + 0;	
-			jugMano = listaJug.get(mano);
-			System.out.println("NULLPartida nº: " + jugadas + " - Primera mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
-			
-		} else {
-			
-			Integer idMano = jugMano.getId();
-			System.out.println("Partida nº: " + jugadas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
-
-			
-			if ( jugadas % 2 == 0) {
-				for(Jugador jug : listaJug){
-					if(jug.getId() == idMano && !jug.getPareja().equals(jugMano.getPareja())){
-						
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							
-					}
-				}
-					//mapa.get(jugMano.getId())
-			}else{
-
-				for(Jugador jug : listaJug){
-					if(jug.getId() != idMano && !jug.getPareja().equals(jugMano.getPareja())){							
-							
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							
-					}
-				}
-			}
-			jugMano = sigMano;
-
-		}
-			
-			
-	}
-	
-		
-
-		
-		
-		
-		
-	
 
 	/*
 	 * Getters & Setters
@@ -127,7 +67,6 @@ public class Partida {
 		for (Integer i = 1; i < 5; i++) {
 			Jugador jugador = new Jugador();
 
-			
 			switch (i) {
 			case 1:
 				jugador.setId(1);
@@ -137,7 +76,7 @@ public class Partida {
 
 				break;
 			case 2:
-			jugador.setId(2);
+				jugador.setId(2);
 
 				jugador.setNombre("J2");
 				jugador.setPareja(pareja1);
@@ -145,7 +84,7 @@ public class Partida {
 				break;
 
 			case 3:
-			jugador.setId(1);
+				jugador.setId(1);
 
 				jugador.setNombre("J1");
 				jugador.setPareja(pareja2);
@@ -162,14 +101,14 @@ public class Partida {
 		}
 
 		/*
-		 * Jugador jug1 = pareja1.getJug1(); Jugador jug2 = pareja1.getJug2(); Jugador
-		 * jug3 = pareja2.getJug1(); Jugador jug4 = pareja2.getJug2();
+		 * Jugador jug1 = pareja1.getJug1(); Jugador jug2 = pareja1.getJug2();
+		 * Jugador jug3 = pareja2.getJug1(); Jugador jug4 = pareja2.getJug2();
 		 */
 
 		/*
-		 * String linea = pareja1.getEquipo() + ": " + jug1.getNombre() + " y " +
-		 * jug2.getNombre() + ".\n" +pareja2.getEquipo() + ": " + jug3.getNombre() +
-		 * " y " + jug4.getNombre() + ".\n";
+		 * String linea = pareja1.getEquipo() + ": " + jug1.getNombre() + " y "
+		 * + jug2.getNombre() + ".\n" +pareja2.getEquipo() + ": " +
+		 * jug3.getNombre() + " y " + jug4.getNombre() + ".\n";
 		 * 
 		 * resPartida(linea);
 		 */
@@ -177,8 +116,66 @@ public class Partida {
 	} // fin crearJugadores()
 
 	/*
-	 * Calculamos el numero de piedras de cada Pareja Calculamos primero el numero
-	 * de Reyes (o 3), luego S,C,7,6,5,4,ASES
+	 * Genera el jugador mano dependiendo de en que jugada nos encontremos
+	 */
+
+	public void generarMano() {
+		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
+		listaJug.addLast(pareja1.getJug1());
+		listaJug.addLast(pareja1.getJug2());
+		listaJug.addLast(pareja2.getJug1());
+		listaJug.addLast(pareja2.getJug2());
+
+		Jugador sigMano = null;
+		jugadas = jugadas + 1;
+
+		if (jugadas == 1) {
+			int mano = (int) (Math.random() * ((3) + 1)) + 0;
+			jugMano = listaJug.get(mano);
+			System.out.println("NULLPartida nº: " + jugadas
+					+ " - Primera mano: " + jugMano.getPareja() + " "
+					+ jugMano.getId());
+
+		} else {
+
+			Integer idMano = jugMano.getId();
+			System.out.println("Partida nº: " + jugadas + " - Antigua mano: "
+					+ jugMano.getPareja() + " " + jugMano.getId());
+
+			if (jugadas % 2 == 0) {
+				for (Jugador jug : listaJug) {
+					if (jug.getId() == idMano
+							&& !jug.getPareja().equals(jugMano.getPareja())) {
+
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: "
+								+ sigMano.getPareja() + " " + sigMano.getId());
+
+					}
+				}
+				// mapa.get(jugMano.getId())
+			} else {
+
+				for (Jugador jug : listaJug) {
+					if (jug.getId() != idMano
+							&& !jug.getPareja().equals(jugMano.getPareja())) {
+
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: "
+								+ sigMano.getPareja() + " " + sigMano.getId());
+
+					}
+				}
+			}
+			jugMano = sigMano;
+
+		}
+
+	}
+
+	/*
+	 * Calculamos el numero de piedras de cada Pareja Calculamos primero el
+	 * numero de Reyes (o 3), luego S,C,7,6,5,4,ASES
 	 */
 
 	public void resuelveGrande() {
@@ -205,35 +202,42 @@ public class Partida {
 			par2.add(numero);
 
 			/*
-			 * Tenemos que comprobar que pareja gana en funcion del lance de grande
+			 * Tenemos que comprobar que pareja gana en funcion del lance de
+			 * grande
 			 */
 
-			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana
+																			// la
+																			// pareja1
 
 				pareja1.addPiedras(3);
-//				resPartida("Grande 3 0 ");
+				// resPartida("Grande 3 0 ");
 
-				System.out.println("Gana j11 por grande: " + par1.get(0) + "," + grande);
+				System.out.println("Gana j11 por grande: " + par1.get(0) + ","
+						+ grande);
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
 				pareja1.addPiedras(3);
-//				resPartida("Grande 3 0 ");
+				// resPartida("Grande 3 0 ");
 
 				ganador = 1;
-				System.out.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
+				System.out.println("Gana j12 por grande: " + par1.get(1) + ","
+						+ grande);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
+				System.out.println("Gana j21 por grande: " + par2.get(0) + ","
+						+ grande);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
+				System.out.println("Gana j22 por grande: " + par2.get(1) + ","
+						+ grande);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -302,15 +306,19 @@ public class Partida {
 			par2.add(numero);
 
 			/*
-			 * Tenemos que comprobar que pareja gana en funcion del lance de chica
+			 * Tenemos que comprobar que pareja gana en funcion del lance de
+			 * chica
 			 */
 
-			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana
+																			// la
+																			// pareja1
 
 				pareja1.addPiedras(3);
 				// resPartida("Chica 3 0\n");
 
-				System.out.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
+				System.out.println("Gana j11 por chica: " + par1.get(0) + ","
+						+ chica);
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
@@ -318,19 +326,22 @@ public class Partida {
 				// resPartida("Chica 3 0\n");
 
 				ganador = 1;
-				System.out.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
+				System.out.println("Gana j12 por chica: " + par1.get(1) + ","
+						+ chica);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
+				System.out.println("Gana j21 por chica: " + par2.get(0) + ","
+						+ chica);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
+				System.out.println("Gana j22 por chica: " + par2.get(1) + ","
+						+ chica);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -370,6 +381,63 @@ public class Partida {
 		}
 
 	} // FIN RESUELVECHICA()
+
+	public void resuelvePares() {
+		int pares = 0;
+		int paresP1 = 0;
+		int paresP2 = 0;
+		pares = cuentaPares(pareja1.getJug1().getMano().getBarajaList());
+
+		paresP1 = paresP1 + pares;
+		System.out.println(paresP1);
+
+	}
+
+	/*
+	 * Pares: 2 cartas iguales; Medias: 3 cartas iguales; Duplex: 2 parejas de
+	 * cartas iguales o 4 cartas
+	 */
+	public int cuentaPares(LinkedList<Carta> lista) {
+		int valor = 0;
+		int cartas = 1;
+
+		for (int i = 0; i < lista.size(); i++) {
+			Carta c = lista.get(i);
+			char id = c.getRepresentacion();
+			lista.remove(i);
+			System.out.println("Removemos " + id);
+			for (int j = 0; j < lista.size(); j++) {
+				if (cartas == 1) {
+					if (id == lista.get(j).getRepresentacion()) {
+						System.out.println(lista.get(j).getRepresentacion());
+
+						cartas = cartas + 1;
+						lista.remove(j);
+					} else {
+						System.out.println("no"
+								+ lista.get(j).getRepresentacion());
+					}
+				}else{
+					if (id == lista.get(j).getRepresentacion()) {
+						cartas = 3;
+						System.out.println(lista.get(j).getRepresentacion());
+
+						cartas = cartas + 1;
+						lista.remove(j);
+					} else {
+						System.out.println("no"
+								+ lista.get(j).getRepresentacion());
+					}
+				}
+
+			}
+			
+
+			i--;
+
+		}
+		return cartas;
+	}
 
 	/*
 	 * Calcula el numero de cartas en una lista de cartas conociendo el id.
