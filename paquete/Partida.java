@@ -10,9 +10,7 @@ public class Partida {
 	private Jugador jugMano;
 	private Pareja ganadores;
 	private int jugadas = 0;
-<<<<<<< Updated upstream
-=======
-	
+
 	// Prueba mano
 	
 	public void generarMano() {
@@ -67,12 +65,6 @@ public class Partida {
 	
 		
 
-		
-		
-		
-		
-	
->>>>>>> Stashed changes
 
 	/*
 	 * Getters & Setters
