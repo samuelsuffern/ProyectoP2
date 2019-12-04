@@ -10,6 +10,69 @@ public class Partida {
 	private Jugador jugMano;
 	private Pareja ganadores;
 	private int jugadas = 0;
+<<<<<<< Updated upstream
+=======
+	
+	// Prueba mano
+	
+	public void generarMano() {
+		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
+		listaJug.addLast(pareja1.getJug1());
+		listaJug.addLast(pareja1.getJug2());
+		listaJug.addLast(pareja2.getJug1());
+		listaJug.addLast(pareja2.getJug2());
+
+		Jugador sigMano = null;
+		jugadas = jugadas +1;
+		
+		
+		if (jugadas == 1) {
+			int mano =(int)(Math.random() * ((3) + 1)) + 0;	
+			jugMano = listaJug.get(mano);
+			System.out.println("Partida nº: " + jugadas + " - Primera mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
+			
+		} else {
+			
+			Integer idMano = jugMano.getId();
+			System.out.println("Partida nº: " + jugadas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
+
+			
+			if ( jugadas % 2 == 0) {
+				for(Jugador jug : listaJug){
+					if(jug.getId() == idMano && !jug.getPareja().equals(jugMano.getPareja())){
+						
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
+							
+					}
+				}
+					//mapa.get(jugMano.getId())
+			}else{
+
+				for(Jugador jug : listaJug){
+					if(jug.getId() != idMano && !jug.getPareja().equals(jugMano.getPareja())){							
+							
+						sigMano = jug;
+						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
+							
+					}
+				}
+			}
+			jugMano = sigMano;
+
+		}
+			
+			
+	}
+	
+		
+
+		
+		
+		
+		
+	
+>>>>>>> Stashed changes
 
 	/*
 	 * Getters & Setters
