@@ -12,6 +12,9 @@ public class Probando{
 		partida.getBaraja().repartirJugada(partida); // aunque de momento no lo usamos
 		System.out.println();
 		partida.resuelvePares();
+		
+		
+		
 		/*partida.generarMano();
 		partida.generarMano();
 		partida.generarMano();

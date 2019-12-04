@@ -389,7 +389,21 @@ public class Partida {
 		pares = cuentaPares(pareja1.getJug1().getMano().getBarajaList());
 
 		paresP1 = paresP1 + pares;
-		System.out.println(paresP1);
+
+		pares = cuentaPares(pareja1.getJug2().getMano().getBarajaList());
+
+		paresP1 = paresP1 + pares;
+
+		pares = cuentaPares(pareja2.getJug1().getMano().getBarajaList());
+
+		paresP2 = paresP2 + pares;
+
+		pares = cuentaPares(pareja2.getJug2().getMano().getBarajaList());
+
+		paresP2 = paresP2 + pares;
+
+
+		System.out.println(paresP1 + "-" + paresP2);
 
 	}
 
@@ -401,33 +415,28 @@ public class Partida {
 		int valor = 0;
 		int cartas = 1;
 
+
+		LinkedList<Carta> listaAux = new LinkedList<Carta>();
+
 		for (int i = 0; i < lista.size(); i++) {
 			Carta c = lista.get(i);
 			char id = c.getRepresentacion();
 			lista.remove(i);
-			System.out.println("Removemos " + id);
+
 			for (int j = 0; j < lista.size(); j++) {
 				if (cartas == 1) {
 					if (id == lista.get(j).getRepresentacion()) {
-						System.out.println(lista.get(j).getRepresentacion());
 
 						cartas = cartas + 1;
 						lista.remove(j);
-					} else {
-						System.out.println("no"
-								+ lista.get(j).getRepresentacion());
 					}
 				}else{
 					if (id == lista.get(j).getRepresentacion()) {
 						cartas = 3;
-						System.out.println(lista.get(j).getRepresentacion());
 
 						cartas = cartas + 1;
 						lista.remove(j);
-					} else {
-						System.out.println("no"
-								+ lista.get(j).getRepresentacion());
-					}
+					} 
 				}
 
 			}
