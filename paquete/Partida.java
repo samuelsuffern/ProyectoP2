@@ -9,10 +9,10 @@ public class Partida {
 	private Pareja pareja2 = new Pareja();
 	private Jugador jugMano;
 	private Pareja ganadores;
-	private int jugadas = 0;
+	private int partidas = 0;
 
 	// Prueba mano
-	
+
 	public void generarMano() {
 		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
 		listaJug.addLast(pareja1.getJug1());
@@ -20,51 +20,52 @@ public class Partida {
 		listaJug.addLast(pareja2.getJug1());
 		listaJug.addLast(pareja2.getJug2());
 
-		Jugador sigMano = null;
-		jugadas = jugadas +1;
-		
-		
-		if (jugadas == 1) {
-			int mano =(int)(Math.random() * ((3) + 1)) + 0;	
+		partidas = partidas + 1;
+		if (jugMano == null) {
+			
+			int mano = (int) (Math.random() * ((3) + 1)) + 0;
 			jugMano = listaJug.get(mano);
-			System.out.println("Partida nº: " + jugadas + " - Primera mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
 			
 		} else {
-			
 			Integer idMano = jugMano.getId();
-			System.out.println("Partida nº: " + jugadas + " - Antigua mano: " + jugMano.getPareja() + " "+  jugMano.getId() );
 
+			if (!pareja1.equals(jugMano.getPareja())) {
+				if (partidas % 2 != 0) {
+					if (pareja1.getJug1().getId() != idMano) {
+						jugMano = pareja1.getJug1();
+					} else {
+						jugMano = pareja1.getJug2();
+					}
+				} else {
+					if (pareja1.getJug1().getId() == idMano) {
+						jugMano = pareja1.getJug1();
+					} else {
+						jugMano = pareja1.getJug2();
+					}
+				}
 			
-			if ( jugadas % 2 == 0) {
-				for(Jugador jug : listaJug){
-					if(jug.getId() == idMano && !jug.getPareja().equals(jugMano.getPareja())){
-						
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							
+			} else {
+				if (partidas % 2 != 0) {
+					if (pareja2.getJug1().getId() != idMano) {
+						jugMano = pareja2.getJug1();
+					} else {
+						jugMano = pareja2.getJug2();
+					}
+				} else {
+					if (pareja2.getJug1().getId() == idMano) {
+						jugMano = pareja2.getJug1();
+					} else {
+						jugMano = pareja2.getJug2();
 					}
 				}
-					//mapa.get(jugMano.getId())
-			}else{
-
-				for(Jugador jug : listaJug){
-					if(jug.getId() != idMano && !jug.getPareja().equals(jugMano.getPareja())){							
-							
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: " + sigMano.getPareja() + " "+  sigMano.getId() );
-							
-					}
-				}
+				
+				
 			}
-			jugMano = sigMano;
 
 		}
-			
-			
-	}
-	
-		
 
+		System.out.println(jugMano.getId() + " - " + jugMano.getPareja().getEquipo());
+	}
 
 	/*
 	 * Getters & Setters
@@ -122,25 +123,25 @@ public class Partida {
 		for (Integer i = 1; i < 5; i++) {
 			Jugador jugador = new Jugador();
 
+			
+
 			switch (i) {
 			case 1:
-				jugador.setId(1);
 				jugador.setNombre("J1");
+				jugador.setId(1);
 				jugador.setPareja(pareja1);
 				pareja1.setJug1(jugador);
 
 				break;
 			case 2:
-				jugador.setId(2);
-
 				jugador.setNombre("J2");
+				jugador.setId(2);
 				jugador.setPareja(pareja1);
 				pareja1.setJug2(jugador);
 				break;
 
 			case 3:
 				jugador.setId(1);
-
 				jugador.setNombre("J1");
 				jugador.setPareja(pareja2);
 				pareja2.setJug1(jugador);
@@ -156,14 +157,14 @@ public class Partida {
 		}
 
 		/*
-		 * Jugador jug1 = pareja1.getJug1(); Jugador jug2 = pareja1.getJug2();
-		 * Jugador jug3 = pareja2.getJug1(); Jugador jug4 = pareja2.getJug2();
+		 * Jugador jug1 = pareja1.getJug1(); Jugador jug2 = pareja1.getJug2(); Jugador
+		 * jug3 = pareja2.getJug1(); Jugador jug4 = pareja2.getJug2();
 		 */
 
 		/*
-		 * String linea = pareja1.getEquipo() + ": " + jug1.getNombre() + " y "
-		 * + jug2.getNombre() + ".\n" +pareja2.getEquipo() + ": " +
-		 * jug3.getNombre() + " y " + jug4.getNombre() + ".\n";
+		 * String linea = pareja1.getEquipo() + ": " + jug1.getNombre() + " y " +
+		 * jug2.getNombre() + ".\n" +pareja2.getEquipo() + ": " + jug3.getNombre() +
+		 * " y " + jug4.getNombre() + ".\n";
 		 * 
 		 * resPartida(linea);
 		 */
@@ -171,66 +172,8 @@ public class Partida {
 	} // fin crearJugadores()
 
 	/*
-	 * Genera el jugador mano dependiendo de en que jugada nos encontremos
-	 */
-
-	public void generarMano() {
-		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
-		listaJug.addLast(pareja1.getJug1());
-		listaJug.addLast(pareja1.getJug2());
-		listaJug.addLast(pareja2.getJug1());
-		listaJug.addLast(pareja2.getJug2());
-
-		Jugador sigMano = null;
-		jugadas = jugadas + 1;
-
-		if (jugadas == 1) {
-			int mano = (int) (Math.random() * ((3) + 1)) + 0;
-			jugMano = listaJug.get(mano);
-			System.out.println("NULLPartida nº: " + jugadas
-					+ " - Primera mano: " + jugMano.getPareja() + " "
-					+ jugMano.getId());
-
-		} else {
-
-			Integer idMano = jugMano.getId();
-			System.out.println("Partida nº: " + jugadas + " - Antigua mano: "
-					+ jugMano.getPareja() + " " + jugMano.getId());
-
-			if (jugadas % 2 == 0) {
-				for (Jugador jug : listaJug) {
-					if (jug.getId() == idMano
-							&& !jug.getPareja().equals(jugMano.getPareja())) {
-
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: "
-								+ sigMano.getPareja() + " " + sigMano.getId());
-
-					}
-				}
-				// mapa.get(jugMano.getId())
-			} else {
-
-				for (Jugador jug : listaJug) {
-					if (jug.getId() != idMano
-							&& !jug.getPareja().equals(jugMano.getPareja())) {
-
-						sigMano = jug;
-						System.out.println("Nueva mano mismo id: "
-								+ sigMano.getPareja() + " " + sigMano.getId());
-
-					}
-				}
-			}
-			jugMano = sigMano;
-
-		}
-
-	}
-
-	/*
-	 * Calculamos el numero de piedras de cada Pareja Calculamos primero el
-	 * numero de Reyes (o 3), luego S,C,7,6,5,4,ASES
+	 * Calculamos el numero de piedras de cada Pareja Calculamos primero el numero
+	 * de Reyes (o 3), luego S,C,7,6,5,4,ASES
 	 */
 
 	public void resuelveGrande() {
@@ -257,42 +200,35 @@ public class Partida {
 			par2.add(numero);
 
 			/*
-			 * Tenemos que comprobar que pareja gana en funcion del lance de
-			 * grande
+			 * Tenemos que comprobar que pareja gana en funcion del lance de grande
 			 */
 
-			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana
-																			// la
-																			// pareja1
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
 
 				pareja1.addPiedras(3);
-				// resPartida("Grande 3 0 ");
+//				resPartida("Grande 3 0 ");
 
-				System.out.println("Gana j11 por grande: " + par1.get(0) + ","
-						+ grande);
+				System.out.println("Gana j11 por grande: " + par1.get(0) + "," + grande);
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
 				pareja1.addPiedras(3);
-				// resPartida("Grande 3 0 ");
+//				resPartida("Grande 3 0 ");
 
 				ganador = 1;
-				System.out.println("Gana j12 por grande: " + par1.get(1) + ","
-						+ grande);
+				System.out.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j21 por grande: " + par2.get(0) + ","
-						+ grande);
+				System.out.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j22 por grande: " + par2.get(1) + ","
-						+ grande);
+				System.out.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -361,19 +297,15 @@ public class Partida {
 			par2.add(numero);
 
 			/*
-			 * Tenemos que comprobar que pareja gana en funcion del lance de
-			 * chica
+			 * Tenemos que comprobar que pareja gana en funcion del lance de chica
 			 */
 
-			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana
-																			// la
-																			// pareja1
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
 
 				pareja1.addPiedras(3);
 				// resPartida("Chica 3 0\n");
 
-				System.out.println("Gana j11 por chica: " + par1.get(0) + ","
-						+ chica);
+				System.out.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
@@ -381,22 +313,19 @@ public class Partida {
 				// resPartida("Chica 3 0\n");
 
 				ganador = 1;
-				System.out.println("Gana j12 por chica: " + par1.get(1) + ","
-						+ chica);
+				System.out.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j21 por chica: " + par2.get(0) + ","
-						+ chica);
+				System.out.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j22 por chica: " + par2.get(1) + ","
-						+ chica);
+				System.out.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -438,60 +367,221 @@ public class Partida {
 	} // FIN RESUELVECHICA()
 
 	public void resuelvePares() {
-		int pares = 0;
 		int paresP1 = 0;
 		int paresP2 = 0;
-		pares = cuentaPares(pareja1.getJug1().getMano().getBarajaList());
+		int piedras = 0;
+		piedras = cuentaPares(pareja1.getJug1().getMano().getBarajaList());
+		paresP1 = paresP1 + piedras;
+		piedras = cuentaPares(pareja1.getJug2().getMano().getBarajaList());
+		paresP1 = paresP1 + piedras;
+		piedras = cuentaPares(pareja2.getJug1().getMano().getBarajaList());
+		paresP2 = paresP2 + piedras;
+		piedras = cuentaPares(pareja2.getJug2().getMano().getBarajaList());
+		paresP2 = paresP2 + piedras;
+		
+		System.out.println("P1: " + paresP1 + " - P2: " + paresP2);
+		pareja1.addPiedras(paresP1);
+		pareja2.addPiedras(paresP2);
 
-		paresP1 = paresP1 + pares;
-		System.out.println(paresP1);
+	} // fin resuelvePares()
 
+	public int piedrasJuegos(Integer juego) {
+		if (juego == 1) {
+			return 3;
+		}else if (juego != 9) {
+			return 2;
+		}
+		
+		return 0;
 	}
+	
+	
+	public void resuelveJuego(){
+		int puntosP1J1 = 0,puntosP1J2,puntosP2J1 = 0,puntosP2J2=0;
+		int juegoP1J1=0,juegoP1J2=0,juegoP2J1=0,juegoP2J2=0;
+
+		puntosP1J1= pareja1.getJug1().getMano().getPuntos();
+		juegoP1J1 = calculaJuego(puntosP1J1);
+		
+		puntosP1J2=pareja1.getJug2().getMano().getPuntos();
+		juegoP1J2 = calculaJuego(puntosP1J2);
+		puntosP2J1=pareja2.getJug1().getMano().getPuntos();
+		juegoP2J1 = calculaJuego(puntosP2J1);
+		puntosP2J2=pareja2.getJug2().getMano().getPuntos();
+		juegoP2J2 = calculaJuego(puntosP2J2);
+		
+	
+		if(juegoP1J1 < juegoP2J1 && juegoP1J1 < juegoP2J2) {
+			pareja1.addPiedras(2);
+			
+			
+			pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+			pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+			
+			pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+			pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+			
+		}else if(juegoP1J2 < juegoP2J1 && juegoP1J2 < juegoP2J2) {
+			pareja1.addPiedras(2);
+			
+			
+			pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+			pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+			
+			pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+			pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+			
+		
+		}else if(juegoP2J1 < juegoP1J1 && juegoP2J1 < juegoP1J2) {
+			pareja2.addPiedras(2);
+			
+			
+			pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+			pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+			
+			pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+			pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+			
+		}else if(juegoP2J2 < juegoP1J1 && juegoP2J2 < juegoP1J2) {
+			pareja2.addPiedras(2);
+			
+			
+			pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+			pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+			
+			pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+			pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+			
+		} else {
+			
+			if(juegoP1J1 + juegoP1J2 < juegoP2J1 + juegoP2J2) {
+				pareja1.addPiedras(2);
+				
+				pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+				pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+				
+				pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+				pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+					
+			} else if (juegoP2J1 + juegoP2J2 < juegoP1J1 + juegoP1J2) {
+				pareja2.addPiedras(2);
+				
+				pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+				pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+				
+				pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+				pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+								
+			} else {
+				jugMano.getPareja().addPiedras(2);
+				
+				pareja1.addPiedras(piedrasJuegos(juegoP1J1));
+				pareja1.addPiedras(piedrasJuegos(juegoP1J2));
+				
+				pareja2.addPiedras(piedrasJuegos(juegoP2J1));
+				pareja2.addPiedras(piedrasJuegos(juegoP2J2));
+								
+			}
+			
+		}
+		
+		
+		System.out.println("resuelveJuego() : P1 vs P2");
+		System.out.println(puntosP1J1 + "," + puntosP1J2 + " - "+puntosP2J1+ ","+puntosP2J2) ;
+		System.out.println("Piedras finales: " + pareja1.getPiedras() + " - " + pareja2.getPiedras());
+		
+	
+	}
+	
+	
+	private int calculaJuego(int puntos) {
+		int juego=0;
+		switch (puntos) {
+		case 31:
+			juego=1;
+			break;
+		case 32:
+			juego=2;
+			break;
+		case 33:
+			juego=8;
+			break;
+		case 34:
+			juego=7;
+			break;
+		case 35:
+			juego=6;
+			break;
+		case 36:
+			juego=5;
+			break;
+		case 37:
+			juego=4;
+			break;
+		case 40:
+			juego=3;		
+			break;
+		default:
+			juego=9;
+			break;
+		}		
+		return juego;
+	}
+	
 
 	/*
 	 * Pares: 2 cartas iguales; Medias: 3 cartas iguales; Duplex: 2 parejas de
 	 * cartas iguales o 4 cartas
 	 */
 	public int cuentaPares(LinkedList<Carta> lista) {
-		int valor = 0;
-		int cartas = 1;
-
+		int piedras = 0;
+		int nParejas = 0;
+		int par = 0; // 2 cartas iguales -> 1 piedra
+		int duplex = 0; // 2 parejas o 4 cartas iguales -> 3 piedras
+		int medias = 0; // 3 cartas iguales -> 2 piedras
 		for (int i = 0; i < lista.size(); i++) {
-			Carta c = lista.get(i);
-			char id = c.getRepresentacion();
-			lista.remove(i);
-			System.out.println("Removemos " + id);
-			for (int j = 0; j < lista.size(); j++) {
-				if (cartas == 1) {
-					if (id == lista.get(j).getRepresentacion()) {
-						System.out.println(lista.get(j).getRepresentacion());
-
-						cartas = cartas + 1;
-						lista.remove(j);
-					} else {
-						System.out.println("no"
-								+ lista.get(j).getRepresentacion());
-					}
-				}else{
-					if (id == lista.get(j).getRepresentacion()) {
-						cartas = 3;
-						System.out.println(lista.get(j).getRepresentacion());
-
-						cartas = cartas + 1;
-						lista.remove(j);
-					} else {
-						System.out.println("no"
-								+ lista.get(j).getRepresentacion());
-					}
+			Carta carta = lista.get(i);
+			char id = carta.getId();
+			
+			int aux = 1;
+			for (int j = i+1 ; j < lista.size(); j++) {
+				char id2 = lista.get(j).getId();
+				
+				if ((id2-id) == 0) {
+					aux = aux + 1;
+					
 				}
-
+			}
+			switch (aux) {
+			case 2:
+				par = 1;
+				nParejas++;
+				if (nParejas == 2) {
+					duplex = 1;
+					piedras = 3;
+					return piedras;
+				}
+				break;
+			case 3:
+				medias = 1;
+				piedras = 2;
+				return piedras;
+			case 4:
+				duplex = 1;
+				piedras = 3;
+				return piedras;
+			default:
+				break;
 			}
 			
-
-			i--;
-
+			//System.out.println("Par=" + par + ",nPar="+nParejas + ",Medias="+medias + ",Duplex="+duplex );
 		}
-		return cartas;
+		nParejas = 0;
+		if (par == 1) {
+			piedras = 1;
+		}
+
+		return piedras;
 	}
 
 	/*
