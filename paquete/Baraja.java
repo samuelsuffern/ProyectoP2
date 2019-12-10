@@ -149,4 +149,14 @@ public class Baraja {
 		 
 	}
 
+
+	// Imprimir baraja
+
+	public void mostrarBaraja(){
+		for (Carta carta: this.baraja){
+			System.out.print(carta.getId() + "-");
+		}
+		System.out.print("\n");
+
+	}
 }
