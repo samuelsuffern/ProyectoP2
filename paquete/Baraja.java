@@ -11,6 +11,7 @@ public class Baraja {
 		return baraja;
 	}
 
+
 	public void setBaraja(LinkedList<Carta> baraja) {
 		this.baraja = baraja;
 	}
@@ -133,19 +134,24 @@ public class Baraja {
 		jugadoresJugada.add(partida.getPareja1().getJug2());
 		jugadoresJugada.add(partida.getPareja2().getJug1());
 		jugadoresJugada.add(partida.getPareja2().getJug2());
-		Collections.shuffle(jugadoresJugada);
 
 		for (Jugador j : jugadoresJugada) {
 			j.setMano(repartir(4, partida));
-			System.out.print("Jugador: ");
+			System.out.print("Cartas J" + j.getId() + "" + j.getPareja().getEquipo() + ": ");
 			for (Carta c : j.getMano().getBarajaList()) {
-				System.out.print(c.getId() + "" + c.getPalo() + " - ");
+				if (c == j.getMano().getBarajaList().getLast()){
+					System.out.print(c.getId() + "" + c.getPalo() + "\n");
+				} else {
+
+					System.out.print(c.getId() + "" + c.getPalo() + " - ");
+				}
 
 			}
 			
-			
 		}
 		
+		System.out.print("\n");
+
 		 
 	}
 
@@ -158,5 +164,14 @@ public class Baraja {
 		}
 		System.out.print("\n");
 
+	}
+
+
+	public int getPuntos() {
+		int puntos = 0;
+		for (Carta carta : this.baraja) {
+			puntos = puntos + carta.getValor();
+		}
+		return puntos;
 	}
 }

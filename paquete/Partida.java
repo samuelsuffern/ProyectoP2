@@ -64,7 +64,7 @@ public class Partida {
 
 		}
 
-		System.out.println(jugMano.getId() + " - " + jugMano.getPareja().getEquipo());
+		System.out.println("Jugador mano: J" + jugMano.getId()  + jugMano.getPareja().getEquipo() + "\n");
 	}
 
 	/*
@@ -208,7 +208,7 @@ public class Partida {
 				pareja1.addPiedras(3);
 //				resPartida("Grande 3 0 ");
 
-				System.out.println("Gana j11 por grande: " + par1.get(0) + "," + grande);
+				System.out.println("Gana J" + pareja1.getJug1().getId()+ "" + pareja1.getEquipo() +" por grande: " + grande + "(" + par1.get(0) + ")");
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
@@ -216,19 +216,27 @@ public class Partida {
 //				resPartida("Grande 3 0 ");
 
 				ganador = 1;
-				System.out.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
+
+				System.out.println("Gana J" + pareja1.getJug2().getId()+ "" + pareja1.getEquipo() +" por grande: " + grande + "(" + par1.get(1) + ")");
+
+				//System.out.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
+				System.out.println("Gana J" + pareja2.getJug1().getId()+ "" + pareja2.getEquipo() +" por grande: " + grande + "(" + par2.get(0) + ")");
+
+				//System.out.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				System.out.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
+
+				System.out.println("Gana J" + pareja2.getJug2().getId()+ "" + pareja2.getEquipo() +" por grande: " + grande + "(" + par2.get(1) + ")");
+
+				//System.out.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -305,7 +313,9 @@ public class Partida {
 				pareja1.addPiedras(3);
 				// resPartida("Chica 3 0\n");
 
-				System.out.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
+				System.out.println("Gana J" + pareja1.getJug1().getId() + "" + pareja1.getEquipo() + " por chica: " + chica + "(" + par1.get(0) + ")");
+
+				//System.out.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
@@ -313,19 +323,26 @@ public class Partida {
 				// resPartida("Chica 3 0\n");
 
 				ganador = 1;
-				System.out.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
+				System.out.println("Gana J" + pareja1.getJug2().getId() + "" + pareja1.getEquipo() + " por chica: " + chica + "(" + par1.get(1) + ")");
+
+				//System.out.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
+				System.out.println("Gana J" + pareja2.getJug1().getId() + "" + pareja2.getEquipo() + " por chica: " + chica + "(" + par2.get(0) + ")");
+
+				//System.out.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
 				pareja2.addPiedras(3);
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				System.out.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
+
+				System.out.println("Gana J" + pareja2.getJug2().getId() + "" + pareja2.getEquipo() + " por chica: " + chica + "(" + par2.get(1) + ")");
+
+				//System.out.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
 			} else { // empate
 				switch (valor) {
 				case 1:
@@ -363,6 +380,8 @@ public class Partida {
 			}
 
 		}
+
+		System.out.print("\n");
 
 	} // FIN RESUELVECHICA()
 

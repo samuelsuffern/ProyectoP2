@@ -7,7 +7,6 @@ public class Pareja {
 	private Integer piedras = 0;
 	private Integer id;
 	private String equipo;
-	private Integer puntos;
 
 	public Jugador getJug1() {
 		return jug1;
