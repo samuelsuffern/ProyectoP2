@@ -5,6 +5,9 @@ import java.util.LinkedList;
 
 public class Baraja {
 	private LinkedList<Carta> baraja = new LinkedList<Carta>();
+	private Salida salida;
+
+
 
 	// Getters & Setters
 	public LinkedList<Carta> getBarajaList() {
@@ -15,6 +18,11 @@ public class Baraja {
 	public void setBaraja(LinkedList<Carta> baraja) {
 		this.baraja = baraja;
 	}
+
+	public void setSalida(Salida salida){
+		this.salida = salida;
+	}
+
 
 	// Función crearBaraja(). Vamos añadiendo cartas a la baraja hasta tener las 40
 	// cartas.
@@ -70,6 +78,12 @@ public class Baraja {
 		}
 	} // fin funcion crearBaraja()
 
+	public void restablecerBaraja(){
+		baraja.clear();
+		crearBaraja();
+	}
+
+
 	/*
 	 * Funcion que desordena nuestra baraja
 	 */
@@ -100,17 +114,16 @@ public class Baraja {
 		Baraja barajajug = new Baraja();
 
 		if (!(n >= 1)) {
-			System.out.println(" n < 1");
+			salida.println(" n < 1");
 			// partida.ficheroSalida("Obtener <" + n + "> cartas: Número no válido");
 		} else if (baraja.size() < n) {
 
-			// partida.ficheroSalida("Obtener <" + n + "> cartas: No hay suficientes
-			// cartas");
+			restablecerBaraja();
 		} else {
 			for (Integer i = 0; i < n; i++) {
 				Carta carta = baraja.getLast();
 
-				// System.out.println("Carta: " + carta.getId() + "" + carta.getPalo() + " --
+				// salida.println("Carta: " + carta.getId() + "" + carta.getPalo() + " --
 				// Valor: " + carta.getValor());
 				barajajug.añadirCarta(baraja.getLast());
 				baraja.removeLast();
@@ -137,20 +150,23 @@ public class Baraja {
 
 		for (Jugador j : jugadoresJugada) {
 			j.setMano(repartir(4, partida));
-			System.out.print("Cartas J" + j.getId() + "" + j.getPareja().getEquipo() + ": ");
+			salida.print("Cartas J" + j.getId() + "" + j.getPareja().getEquipo() + ": ");
+
+
 			for (Carta c : j.getMano().getBarajaList()) {
+
 				if (c == j.getMano().getBarajaList().getLast()){
-					System.out.print(c.getId() + "" + c.getPalo() + "\n");
+					salida.println(c.getId() + "" + c.getPalo());
 				} else {
 
-					System.out.print(c.getId() + "" + c.getPalo() + " - ");
+					salida.print(c.getId() + "" + c.getPalo() + " - ");
 				}
 
 			}
 			
 		}
 		
-		System.out.print("\n");
+		salida.print("\n");
 
 		 
 	}
@@ -160,9 +176,9 @@ public class Baraja {
 
 	public void mostrarBaraja(){
 		for (Carta carta: this.baraja){
-			System.out.print(carta.getId() + "-");
+			salida.print(carta.getId() + "-");
 		}
-		System.out.print("\n");
+		salida.print("\n");
 
 	}
 
