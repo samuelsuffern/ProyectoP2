@@ -1,0 +1,133 @@
+Cartas J1PA: SE - 1E - 5B - 2O
+Cartas J2PA: 5E - 2B - 2C - 4O
+Cartas J1PB: 3E - 4C - 5O - 3O
+Cartas J2PB: 3B - 7B - SO - SC
+
+Jugador mano: J1PB
+
+Cartas J1PA: 7O - 4B - SB - 4E
+Cartas J2PA: 6O - 2E - 7C - RO
+Cartas J1PB: RC - CC - 6C - CE
+Cartas J2PB: 3C - 1O - 5C - RB
+
+Gana J2PB por grande: R(2)
+Gana J1PA por chica: 4(2)
+
+P1: 1 - P2: 1
+resuelveJuego() : P1 vs P2
+25,24 - 36,26
+Piedras finales: 4 - 8
+Jugador mano: J1PA
+
+Cartas J1PA: 1C - 7E - 6B - 6E
+Cartas J2PA: 1B - RE - CB - CO
+Cartas J1PB: Cartas J2PB: RC - CC - SC - 7C
+
+Gana J2PA por grande: C(2)
+Gana J1PA por chica: 1(1)
+
+P1: 2 - P2: 0
+resuelveJuego() : P1 vs P2
+20,31 - 0,37
+Piedras finales: 17 - 10
+Jugador mano: J2PB
+
+Cartas J1PA: 1E - 2B - 5C - 7B
+Cartas J2PA: RE - 1B - 6O - 2C
+Cartas J1PB: 3E - RB - 1O - 6E
+Cartas J2PB: 3B - 5E - 2O - 7O
+
+Gana J1PB por grande: R(2)
+Gana J1PA por chica: 1(2)
+
+P1: 0 - P2: 0
+resuelveJuego() : P1 vs P2
+14,18 - 27,23
+Piedras finales: 20 - 15
+Jugador mano: J2PA
+
+Cartas J1PA: CE - SB - CB - SE
+Cartas J2PA: RO - CO - 6C - 3C
+Cartas J1PB: 1C - 4C - 4B - 6B
+Cartas J2PB: SO - 4E - 7E - 2E
+
+Gana J2PA por grande: R(2)
+Gana J1PB por chica: 1(1)
+
+P1: 3 - P2: 1
+resuelveJuego() : P1 vs P2
+40,36 - 15,22
+Piedras finales: 32 - 19
+Cartas J1PA: RB - 4B - SE - 3O
+Cartas J2PA: 6O - 5O - 3C - SO
+Cartas J1PB: SB - 2C - RO - CO
+Cartas J2PB: 7B - 2O - 2B - 6E
+
+Jugador mano: J1PB
+
+Cartas J1PA: 5B - 1E - 7E - 6B
+Cartas J2PA: 3E - 1C - 3B - 4O
+Cartas J1PB: CC - 1O - 7C - CB
+Cartas J2PB: CE - SC - 2E - RE
+
+Gana J2PA por grande: R(2)
+Gana J2PA por chica: 4(1)
+
+P1: 1 - P2: 1
+resuelveJuego() : P1 vs P2
+19,25 - 28,31
+Piedras finales: 7 - 6
+Jugador mano: J1PA
+
+Cartas J1PA: 6C - 5E - 4E - 1B
+Cartas J2PA: 7O - RC - 4C - 5C
+Cartas J1PB: Cartas J2PB: RC - CC - SC - 7C
+
+Gana J2PB por grande: C(1)
+Gana J1PA por chica: 1(1)
+
+P1: 0 - P2: 0
+resuelveJuego() : P1 vs P2
+16,26 - 0,37
+Piedras finales: 10 - 13
+Jugador mano: J2PB
+
+Cartas J1PA: 4B - 1C - 7O - 1B
+Cartas J2PA: SO - SE - 2B - 1E
+Cartas J1PB: RE - 6B - 5C - 3O
+Cartas J2PB: 2E - CO - CE - 4O
+
+Gana J1PB por grande: R(2)
+Gana J1PA por chica: 1(2)
+
+P1: 2 - P2: 1
+resuelveJuego() : P1 vs P2
+13,22 - 31,25
+Piedras finales: 15 - 22
+Jugador mano: J2PA
+
+Cartas J1PA: 6C - 2C - 3C - 5B
+Cartas J2PA: 6O - 5E - 6E - 3E
+Cartas J1PB: 1O - 7B - RB - SB
+Cartas J2PB: 4C - 4E - 3B - 5O
+
+Gana J1PB por grande: S(1)
+Gana J2PB por chica: 4(2)
+
+P1: 1 - P2: 1
+resuelveJuego() : P1 vs P2
+22,27 - 28,23
+Piedras finales: 18 - 29
+Jugador mano: J1PB
+
+Cartas J1PA: 2O - CB - RO - 7E
+Cartas J2PA: Cartas J1PB: RC - CC - SC - 7C
+Cartas J2PB: 6C - 5C - 4C - 3C
+
+Gana J1PB por grande: S(1)
+Gana J1PA por chica: 1(1)
+
+P1: 0 - P2: 0
+resuelveJuego() : P1 vs P2
+28,0 - 37,25
+Piedras finales: 21 - 36

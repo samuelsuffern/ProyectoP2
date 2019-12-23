@@ -77,9 +77,8 @@ public class Partida {
 	public void juegoAutonomo(){
 		lances.setSalida(salida);
 		crearJugadores();
-		generarMano();
 
-		lances.setData(pareja1, pareja2, jugMano);
+		lances.setData(pareja1, pareja2);
 
 
 		baraja.crearBaraja();

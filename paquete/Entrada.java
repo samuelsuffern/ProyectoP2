@@ -9,10 +9,14 @@ import java.util.LinkedList;
 
 
 public class Entrada {
+	
+
+	
 	private Integer modoJuego;
 
 	Entrada (String[] args, Salida salida){
 		leerArgs(args,salida);
+		
 	}
 	
 	public void leerArgs(String[] args,Salida salida){

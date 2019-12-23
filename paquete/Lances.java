@@ -14,10 +14,9 @@ public class Lances {
 
     }
     
-    public void setData(Pareja pareja1, Pareja pareja2, Jugador jugMano){
+    public void setData(Pareja pareja1, Pareja pareja2){
         this.pareja1 = pareja1;
         this.pareja2 = pareja2;
-        this.jugMano = jugMano;
         
     }
 
@@ -243,7 +242,7 @@ public class Lances {
 
 		}
 
-		System.out.print("\n");
+		salida.print("\n");
 
 	} // FIN RESUELVECHICA()
 
