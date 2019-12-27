@@ -1,0 +1,5 @@
+-(3O, RO, 1C, 2B)-(4C, 4B, 4E, SB)*(5E, 4O, 3E, 3B)-(6B, 6E, RB, CC)
+-(6B, SB, 1C, 1O)-(6E, 4O, RO, 3B)-(2O, 2C, 1B, 2E)*(CC, CO, 7E, 7C)
+-(6B, SB, 1C, 1O)-(6E, 4O, RO, 3B)-(2O, 2C, 1B, 2E)*(CC, CO, 7E, 7C)
+-(6B, SB, 1C, 1O)-(6E, 4O, RO, 3B)-(2O, 2C, 1B, 2E)*(CC, CO, 7E, 7C)
+-(6B, SB, 1C, 1O)-(6E, 4O, RO, 3B)-(2O, 2C, 1B, 2E)*(CC, CO, 7E, 7C)

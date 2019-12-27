@@ -2,8 +2,8 @@ package paquete;
 
 public class Pareja {
 
-	private Jugador jug1 = new Jugador();
-	private Jugador jug2 = new Jugador();
+	private Jugador jug1;
+	private Jugador jug2;
 	private Integer piedras = 0;
 	private Integer id;
 	private String equipo;
@@ -46,6 +46,10 @@ public class Pareja {
 
 	public void addPiedras(Integer piedras) {
 		this.piedras = this.piedras + piedras;
+	}
+
+	public String toString(){
+		return id + "-" + equipo + ": " + jug1.getNombre() + "_" + jug2.getNombre();
 	}
 
 }

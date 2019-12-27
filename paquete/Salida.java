@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.util.Collections;
+import java.util.LinkedList;
 
 
 public class Salida{
@@ -40,6 +42,43 @@ public class Salida{
         }
         
     }
+
+
+    public static String ordenarJugada(Jugador jugador, Partida partida){
+        Jugador jugMano = partida.getJugMano();
+		String linea = "";
+        LinkedList<Carta> lista = jugador.getMano().getBarajaList();
+        try {
+            Collections.sort(lista, new OrdenaJugada());
+
+        } catch (Exception e) {
+            //TODO: handle exception
+            System.out.println(e);
+        }
+		
+		if (jugador.equals(jugMano)){
+			linea = linea + "*";
+		} else {
+			linea = linea + "-";
+        }
+
+
+		for(int i = 0; i < lista.size(); i++){
+			Carta carta = lista.get(i);
+			if (i == 0){
+				linea = linea + "(" + carta.getId() + "" + carta.getPalo() +", ";
+			}else if ( i != lista.size() -1){
+				linea = linea + carta.getId() + "" + carta.getPalo() +", "; 
+			} else {
+				linea = linea + carta.getId() + "" + carta.getPalo() +")";
+			}
+		}
+
+
+
+		return linea;
+
+	}
 
 
    

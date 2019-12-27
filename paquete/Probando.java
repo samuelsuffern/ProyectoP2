@@ -11,15 +11,13 @@ public class Probando{
 	
 	public static void main(String[] args) {
 
-		
-		Salida salida = new Salida();
-		Entrada entrada = new Entrada(args, salida);
-
 		Partida partida = new Partida();
+		Salida salida = new Salida();
+		Entrada entrada = new Entrada(args, salida, partida);
 		partida.setSalida(salida);
 
-		int modo = entrada.getModoJuego();
 
+		int modo = entrada.getModoJuego();
 		switch (modo) {
 		case 0:
 			partida.juegoPreestablecido();

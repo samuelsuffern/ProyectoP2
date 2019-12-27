@@ -5,8 +5,7 @@ import java.util.LinkedList;
 
 public class Baraja {
 	private LinkedList<Carta> baraja = new LinkedList<Carta>();
-	private Salida salida;
-
+	private static Salida salida;
 
 
 	// Getters & Setters
@@ -19,8 +18,8 @@ public class Baraja {
 		this.baraja = baraja;
 	}
 
-	public void setSalida(Salida salida){
-		this.salida = salida;
+	public static void setSalida(Salida sal){
+		salida = sal;
 	}
 
 
@@ -119,9 +118,16 @@ public class Baraja {
 		} else if (baraja.size() < n) {
 
 			restablecerBaraja();
+
+			for (Integer i = 0; i < n; i++) {
+
+				// salida.println("Carta: " + carta.getId() + "" + carta.getPalo() + " --
+				// Valor: " + carta.getValor());
+				barajajug.añadirCarta(baraja.getLast());
+				baraja.removeLast();
+			}
 		} else {
 			for (Integer i = 0; i < n; i++) {
-				Carta carta = baraja.getLast();
 
 				// salida.println("Carta: " + carta.getId() + "" + carta.getPalo() + " --
 				// Valor: " + carta.getValor());
@@ -150,24 +156,9 @@ public class Baraja {
 
 		for (Jugador j : jugadoresJugada) {
 			j.setMano(repartir(4, partida));
-			salida.print("Cartas J" + j.getId() + "" + j.getPareja().getEquipo() + ": ");
-
-
-			for (Carta c : j.getMano().getBarajaList()) {
-
-				if (c == j.getMano().getBarajaList().getLast()){
-					salida.println(c.getId() + "" + c.getPalo());
-				} else {
-
-					salida.print(c.getId() + "" + c.getPalo() + " - ");
-				}
-
-			}
-			
+						
 		}
 		
-		salida.print("\n");
-
 		 
 	}
 
@@ -175,10 +166,17 @@ public class Baraja {
 	// Imprimir baraja
 
 	public void mostrarBaraja(){
-		for (Carta carta: this.baraja){
-			salida.print(carta.getId() + "-");
+		for (Carta carta: baraja){
+			if (carta.equals(baraja.getLast())) {
+				salida.print(carta.getId() + "" + carta.getPalo() +")");
+
+			} else if (carta.equals(baraja.getFirst())) {
+				salida.print("(" + carta.getId() + carta.getPalo() + ", ");
+
+			} else {
+				salida.print(carta.getId() + "" + carta.getPalo() + ", ");
+			}
 		}
-		salida.print("\n");
 
 	}
 
@@ -189,5 +187,19 @@ public class Baraja {
 			puntos = puntos + carta.getValor();
 		}
 		return puntos;
+	}
+
+	public Carta findCarta(char palo, char idCarta){
+		for (int i = 0; i < baraja.size(); i++){
+			
+			if ((baraja.get(i).getId()== idCarta) && (baraja.get(i).getPalo()==palo) ){
+				//System.out.println(barajaList.get(i).getId() + " - "  + barajaList.get(i).getPalo()) ;
+				Carta carta = baraja.get(i);
+			 	baraja.remove(i);
+				return carta;
+			}
+
+		}
+		return null;
 	}
 }
