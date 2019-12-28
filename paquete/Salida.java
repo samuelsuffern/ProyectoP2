@@ -22,7 +22,7 @@ public class Salida{
                 this.writer.flush();
     
             } catch (Exception e) {
-                System.out.println(e);
+                //System.out.println(e);
             }
         }
         
@@ -37,7 +37,7 @@ public class Salida{
                 this.writer.flush();
     
             } catch (Exception e) {
-                System.out.println(e);
+                //System.out.println(e);
             }
         }
         

@@ -75,7 +75,6 @@ public class Partida {
 
 	public void juegoPreestablecido(){
 		lances.setSalida(salida);
-		lances.setData(pareja1, pareja2);
 
 		if (pareja1 == null && pareja2 == null) {
 			crearJugadores();
@@ -85,30 +84,45 @@ public class Partida {
 		jugadas++;
 		Entrada.leerFichJugadas(this);
 
-		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre());
-		salida.println(pareja2.getEquipo() + ": " + pareja2.getJug1().getNombre() + " y " + pareja2.getJug2().getNombre());
+		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre() + ".");
+		salida.println(pareja2.getEquipo() + ": " + pareja2.getJug1().getNombre() + " y " + pareja2.getJug2().getNombre() + ".");
 		salida.println("Mano: " + jugMano.getNombre() + ".\n");
 
-		try {
+		lances.setData(pareja1, pareja2);
+
+
+	
 			while (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
 				mostrarManosJugadores();
+
 			
 				lances.nextMano(jugMano);
+
 
 				lances.resuelveGrande();
 				lances.resuelveChica();
 				lances.resuelvePares();
 				lances.resuelveJuego();
 
-				borrarManos();
+				
+				if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
+					borrarManos();
+					generarMano();
+					lances.nextMano(jugMano);
+					Entrada.leerFichJugadas(this);
+				}
 
-				jugadas++;
-				Entrada.leerFichJugadas(this);
+			
 			}
-		} catch (Exception e) {
-			jugadas--;
-			salida.println("\nPartida incompleta. Número total de jugadas: " + jugadas);
-		}
+
+			if (pareja1.getPiedras() > pareja2.getPiedras()) {
+				ganadores = pareja1;
+			} else {
+				ganadores = pareja2;
+			}
+	
+			salida.println("Gana: " + ganadores.getEquipo() + ". Número total de jugadas: " + jugadas + ".");
+		
 
 	}
 
@@ -137,6 +151,9 @@ public class Partida {
 
 
 		while (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40){
+			
+
+			baraja.restablecerBaraja();
 			baraja.barajarMazo(this);
 			baraja.repartirJugada(this);
 
@@ -149,10 +166,11 @@ public class Partida {
 			lances.resuelvePares();
 			lances.resuelveJuego();
 
-			generarMano();
-			lances.nextMano(jugMano);
-
-			baraja.restablecerBaraja();
+			if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
+				generarMano();
+				lances.nextMano(jugMano);
+			}
+		
 
 		}
 
@@ -175,38 +193,37 @@ public class Partida {
 			salida.print("*");
 			pareja1.getJug1().getMano().mostrarBaraja();
 			salida.print("-");
-			pareja1.getJug2().getMano().mostrarBaraja();
+			pareja2.getJug1().getMano().mostrarBaraja();	
 			salida.print("-");
-			pareja2.getJug1().getMano().mostrarBaraja();
+			pareja1.getJug2().getMano().mostrarBaraja();
 			salida.print("-");
 			pareja2.getJug2().getMano().mostrarBaraja();
 
 		} else if (pareja1.getJug2().equals(jugMano)) {
 			salida.print("-");
 			pareja1.getJug1().getMano().mostrarBaraja();
+			salida.print("-");
+			pareja2.getJug1().getMano().mostrarBaraja();	
 			salida.print("*");
 			pareja1.getJug2().getMano().mostrarBaraja();
 			salida.print("-");
-			pareja2.getJug1().getMano().mostrarBaraja();
-			salida.print("-");
 			pareja2.getJug2().getMano().mostrarBaraja();
-
 		} else if (pareja2.getJug1().equals(jugMano)) {
 			salida.print("-");
 			pareja1.getJug1().getMano().mostrarBaraja();
+			salida.print("*");
+			pareja2.getJug1().getMano().mostrarBaraja();	
 			salida.print("-");
 			pareja1.getJug2().getMano().mostrarBaraja();
-			salida.print("*");
-			pareja2.getJug1().getMano().mostrarBaraja();
 			salida.print("-");
 			pareja2.getJug2().getMano().mostrarBaraja();
 		} else {
 			salida.print("-");
 			pareja1.getJug1().getMano().mostrarBaraja();
 			salida.print("-");
-			pareja1.getJug2().getMano().mostrarBaraja();
+			pareja2.getJug1().getMano().mostrarBaraja();	
 			salida.print("-");
-			pareja2.getJug1().getMano().mostrarBaraja();
+			pareja1.getJug2().getMano().mostrarBaraja();
 			salida.print("*");
 			pareja2.getJug2().getMano().mostrarBaraja();
 
@@ -232,6 +249,7 @@ public class Partida {
 		LinkedList<Jugador> listaJug = new LinkedList<Jugador>();
 		listaJug.addLast(pareja1.getJug1());
 		listaJug.addLast(pareja2.getJug1());
+		
 		listaJug.addLast(pareja1.getJug2());
 		listaJug.addLast(pareja2.getJug2());
 

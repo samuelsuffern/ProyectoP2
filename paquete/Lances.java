@@ -10,7 +10,7 @@ public class Lances {
     
 
     public void setSalida(Salida salida){
-        this.salida =salida;
+        this.salida = salida;
 
     }
     
@@ -38,7 +38,9 @@ public class Lances {
     
 
     public void resuelveGrande() {
+
 		Baraja mano11 = pareja1.getJug1().getMano();
+
 		Baraja mano12 = pareja1.getJug2().getMano();
 		Baraja mano21 = pareja2.getJug1().getMano();
 		Baraja mano22 = pareja2.getJug2().getMano();
@@ -278,13 +280,13 @@ public class Lances {
 		if(juegoP1J1 < juegoP2J1 && juegoP1J1 < juegoP2J2) {
 			int piedrasP1 = 2;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
-			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
 			pareja1.addPiedras(piedrasP1);
 
 
 			int piedrasP2 = 0;
-			piedrasP2 += piedrasJuegos(juegoP1J1);
-			piedrasP2 += piedrasJuegos(juegoP1J1);
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
 
 			pareja2.addPiedras(piedrasP2);
 
@@ -294,13 +296,13 @@ public class Lances {
 		}else if(juegoP1J2 < juegoP2J1 && juegoP1J2 < juegoP2J2) {
 			int piedrasP1 = 2;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
-			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
 			pareja1.addPiedras(piedrasP1);
 
 
 			int piedrasP2 = 0;
-			piedrasP2 += piedrasJuegos(juegoP1J1);
-			piedrasP2 += piedrasJuegos(juegoP1J1);
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
 			
 			pareja2.addPiedras(piedrasP2);
 
@@ -311,13 +313,13 @@ public class Lances {
 		}else if(juegoP2J1 < juegoP1J1 && juegoP2J1 < juegoP1J2) {
 			int piedrasP1 = 0;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
-			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
 			pareja1.addPiedras(piedrasP1);
 
 
 			int piedrasP2 = 2;
-			piedrasP2 += piedrasJuegos(juegoP1J1);
-			piedrasP2 += piedrasJuegos(juegoP1J1);
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
 			
 			pareja2.addPiedras(piedrasP2);
 
@@ -327,13 +329,13 @@ public class Lances {
 		}else if(juegoP2J2 < juegoP1J1 && juegoP2J2 < juegoP1J2) {
 			int piedrasP1 = 0;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
-			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
 			pareja1.addPiedras(piedrasP1);
 
 
 			int piedrasP2 = 2;
-			piedrasP2 += piedrasJuegos(juegoP1J1);
-			piedrasP2 += piedrasJuegos(juegoP1J1);
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
 			
 			pareja2.addPiedras(piedrasP2);
 
@@ -345,13 +347,13 @@ public class Lances {
 			if(juegoP1J1 + juegoP1J2 < juegoP2J1 + juegoP2J2) {
 				int piedrasP1 = 2;
 				piedrasP1 += piedrasJuegos(juegoP1J1);
-				piedrasP1 += piedrasJuegos(juegoP1J1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
 				pareja1.addPiedras(piedrasP1);
 
 
 				int piedrasP2 = 0;
-				piedrasP2 += piedrasJuegos(juegoP1J1);
-				piedrasP2 += piedrasJuegos(juegoP1J1);
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
 			
 				pareja2.addPiedras(piedrasP2);
 
@@ -361,13 +363,13 @@ public class Lances {
 			} else if (juegoP2J1 + juegoP2J2 < juegoP1J1 + juegoP1J2) {
 				int piedrasP1 = 0;
 				piedrasP1 += piedrasJuegos(juegoP1J1);
-				piedrasP1 += piedrasJuegos(juegoP1J1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
 				pareja1.addPiedras(piedrasP1);
 
 
 				int piedrasP2 = 2;
-				piedrasP2 += piedrasJuegos(juegoP1J1);
-				piedrasP2 += piedrasJuegos(juegoP1J1);
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
 			
 				pareja2.addPiedras(piedrasP2);
 
@@ -380,20 +382,17 @@ public class Lances {
 				int piedrasP1 = 0;
 
 				piedrasP1 += piedrasJuegos(juegoP1J1);
-				piedrasP1 += piedrasJuegos(juegoP1J1);
-				pareja1.addPiedras(piedrasP1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
 
 				int piedrasP2 = 0;
-				piedrasP2 += piedrasJuegos(juegoP1J1);
-				piedrasP2 += piedrasJuegos(juegoP1J1);
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
 			
+				pareja1.addPiedras(piedrasP1);
 				pareja2.addPiedras(piedrasP2);
+				
+				
 
-				if (jugMano.getPareja().equals(pareja1)) {
-					piedrasP1 += 2;
-				} else {
-					piedrasP2 += 2;
-				}
 				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
 								
@@ -450,6 +449,7 @@ public class Lances {
 
 	public int cuentaPares(LinkedList<Carta> lista) {
 		int iguales = 1;
+		int nParejas = 0;
 		LinkedList<Carta> aux = new LinkedList<Carta>(lista);
 
 		for (int i = 0; i < aux.size(); i++) {
@@ -457,24 +457,23 @@ public class Lances {
 			aux.remove(i);
 			i--;
 
-			//System.out.println(iguales);
 
 			for (int j = i+1; j < aux.size(); j++) {
 				char id2 = aux.get(j).getId();
-				
-				//System.out.println("\n--- " + id + "// " + id2 );
+				//System.out.println("id: " + id + "// " + id2);
+
 
 				if ( (id - id2) == 0){
 					iguales = iguales + 1;
 					aux.remove(j);
 
 					j--;
-				} else if ( id == 'R' && id2 == '3') {
+				} else if ( (id == 'R' && id2 == '3') || (id == '3' && id2 == 'R')) {
 					iguales = iguales + 1;
 					aux.remove(j);
 
 					j--;
-				} else if (id == '1' && id2 == '2') {
+				} else if ((id == '1' && id2 == '2') || (id == '2' && id2 == '1')) {
 					iguales = iguales + 1;
 					aux.remove(j);
 
@@ -482,18 +481,28 @@ public class Lances {
 				}
 			}
 
+			//System.out.println("Iguales ->" + iguales);
+
+
 			if (iguales == 4) {
 				return 3;
 
 			} else if (iguales == 3) {
 				return 2;
 
+			} else if (iguales == 2) {
+				nParejas++;
+				iguales = 1;
 			}
+
+			//System.out.println("Nparejas: " + nParejas);
 
 			
 		}
 
-		if ( iguales == 2) {
+		if ( nParejas == 2) {
+			return 3;
+		} else if (nParejas == 1) {
 			return 1;
 		}
 

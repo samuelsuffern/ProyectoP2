@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class Entrada {
 	
 	private Integer modoJuego;
-	private static LinkedList<String> jugadas = new LinkedList<>();
+	private static LinkedList<String> jugadas = new LinkedList<String>();
 	private static String ficheroJugadas;
 
 	Entrada (String[] args, Salida salida, Partida partida){
@@ -26,7 +26,7 @@ public class Entrada {
 
 			if (args[0].equals("-j")){
 				// Leer fichero jugadas \\
-				LinkedList<String> auxArgs = new LinkedList<>();
+				LinkedList<String> auxArgs = new LinkedList<String>();
 
 				for (int i = 2; i < args.length; i++){
 					auxArgs.addLast(args[i]);
@@ -65,7 +65,11 @@ public class Entrada {
 					auxArgs.addLast(args[i]);
 				}
 
-				if (auxArgs.size() > 1) opcionalArgs(auxArgs,salida,partida);
+				if (auxArgs.size() != 0){
+					opcionalArgs(auxArgs,salida,partida);
+				} else {
+					partida.crearJugadores();
+				}
 
 
 				modoJuego = 2;
@@ -230,7 +234,7 @@ public class Entrada {
 			try {
 				if (auxArgs.get(2).equals("-o")){
 					try {
-						salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(3), true)));
+						salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(3))));
 
 					} catch (Exception e) {
 						//TODO: handle exception
@@ -244,7 +248,7 @@ public class Entrada {
 		} else {
 			if (auxArgs.get(0).equals("-o")){
 				try {
-					salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(1), true)));
+					salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(1))));
 
 				} catch (Exception e) {
 					//TODO: handle exception
@@ -277,17 +281,18 @@ public class Entrada {
 		Jugador jugMano = partida.getJugMano();
 		Pareja pareja1 = partida.getPareja1();
 		Pareja pareja2 = partida.getPareja2();
-		String linea = jugadas.get(partida.getJugadas() - 1);
+		String linea = jugadas.get(partida.getJugadas() -1);
 		char idCarta;
 		char palo;
 		Baraja barajaJug = new Baraja();
 
 
 		String mano1 = linea.substring(0, 17); // -(30, R0, 1C, 2B)
-		String mano2 = linea.substring(17, 34); // -(4C, 4B, 4E, SB)
-		String mano3 = linea.substring(34, 51); // *(5E, 4C, 3E, 3B)
+
+		String mano3 = linea.substring(17, 34); // -(4C, 4B, 4E, SB)
+		String mano2 = linea.substring(34, 51); // *(5E, 4C, 3E, 3B)
 		String mano4 = linea.substring(51); // -(6B, 6E, RB, RB, CC)
-		String[] manos = {mano1,mano2,mano3,mano4};
+		String[] manos = {mano1,mano3,mano2,mano4};
 		for(int j = 0; j < manos.length ; j++){
 			
 			char mano = manos[j].charAt(0);
@@ -308,28 +313,32 @@ public class Entrada {
 					case 0:
 					if(mano == '*'){
 						jugMano = pareja1.getJug1();
+						partida.setJugMano(jugMano);
 					}
 					pareja1.getJug1().getMano().añadirCarta(carta);
 					break;
 					case 1:
 					
 					if(mano == '*'){
-						jugMano = pareja1.getJug2();
+						jugMano = pareja2.getJug1();
+						partida.setJugMano(jugMano);
 
 					}
-					pareja1.getJug2().getMano().añadirCarta(carta);
+					pareja2.getJug1().getMano().añadirCarta(carta);
 					break;
 					case 2:
 					
 					if(mano == '*'){
-						jugMano = 	pareja2.getJug1();
+						jugMano = 	pareja1.getJug2();
+						partida.setJugMano(jugMano);
 					}
-					pareja2.getJug1().getMano().añadirCarta(carta);
+					pareja1.getJug2().getMano().añadirCarta(carta);
 					break;
 					case 3:
 					
 					if(mano == '*'){
 						jugMano = pareja2.getJug2();
+						partida.setJugMano(jugMano);
 					}
 					pareja2.getJug2().getMano().añadirCarta(carta);
 					break;
@@ -342,10 +351,10 @@ public class Entrada {
 
 		}
 		
-	
+
 		partida.setPareja1(pareja1);
 		partida.setPareja2(pareja2);
-		partida.setJugMano(jugMano);
+		
 
 
 		partida.getBaraja().restablecerBaraja();
