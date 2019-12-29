@@ -124,6 +124,7 @@ public class Partida {
 
 		
 		jugadas++;
+		baraja.restablecerBaraja();
 		Entrada.leerFichJugadas(this);
 
 		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre() + ".");
@@ -131,19 +132,19 @@ public class Partida {
 		salida.println("Mano: " + jugMano.getNombre() + ".\n");
 
 		lances.setData(pareja1, pareja2);
+		lances.nextMano(jugMano);
 
 
 	
 			while (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
 				mostrarManosJugadores();
 
-			
-				lances.nextMano(jugMano);
-
-
 				lances.resuelveGrande();
+				salida.print(" ");
 				lances.resuelveChica();
+				salida.print(" ");
 				lances.resuelvePares();
+				salida.print(" ");
 				lances.resuelveJuego();
 
 				

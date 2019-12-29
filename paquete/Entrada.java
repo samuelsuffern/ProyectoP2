@@ -21,10 +21,10 @@ public class Entrada {
 	private static String ficheroComandos;
 
 	Entrada(String[] args, Salida salida, Partida partida) {
-		leerArgs(args, salida, partida);
+		modoJuego = leerArgs(args, salida, partida);
 	}
 
-	public void leerArgs(String[] args, Salida salida, Partida partida) {
+	public static int leerArgs(String[] args, Salida salida, Partida partida) {
 
 		try {
 			// ------------Reparto preestablecido-------------//
@@ -47,7 +47,7 @@ public class Entrada {
 
 				guardarJugadas();
 
-				modoJuego = 0;
+				return 0;
 
 			} else if (args[0].equals("-c")) {
 				// Leer fichero comandos \\
@@ -62,7 +62,7 @@ public class Entrada {
 					opcionalArgs(auxArgs, salida, partida);
 				}
 
-				modoJuego = 1;
+				return 1;
 			} else {
 				// Es modo autonomo \\
 				// ------------Autonomo-------------//
@@ -78,17 +78,17 @@ public class Entrada {
 					partida.crearJugadores();
 				}
 
-				modoJuego = 2;
+				return 2;
 			}
 
 		} catch (Exception e) {
-			modoJuego = 2;
+			return 2;
 
 		}
 
 	}
 
-	private void guardarComandos(String fichero) {
+	private static void guardarComandos(String fichero) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fichero));
 			String line = reader.readLine();
@@ -112,7 +112,7 @@ public class Entrada {
 		}
 	}
 
-	public static boolean isPlayer(LinkedList<Jugador> lista,int id ){
+	public static boolean isPlayer(LinkedList<Jugador> lista, int id) {
 
 		for (Jugador jugador : lista) {
 			if (jugador.getId() == id) {
@@ -139,7 +139,14 @@ public class Entrada {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-				String nombre = split[2];
+				String nombre = "";
+				for (int i = 2; i < split.length; i++) {
+					if (i == split.length - 1) {
+						nombre += split[i];
+					} else {
+						nombre += split[i] + " ";
+					}
+				}
 
 				if (isPlayer(listaJugadores, id)) {
 					salida.println(comandos + ": FAIL.");
@@ -155,10 +162,19 @@ public class Entrada {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
+				int deleted = 0;
 				for (Jugador jugador2 : listaJugadores) {
 					if (jugador2.getId() == id) {
 						listaJugadores.remove(jugador2);
+						salida.println(comandos + ": OK.");
+						deleted = 1;
+					} else {
+
 					}
+				}
+
+				if (deleted == 0) {
+					salida.println(comandos + ": FAIL.");
 				}
 				break;
 			case "NewCouple":
@@ -183,21 +199,30 @@ public class Entrada {
 					salida.println(comandos + ": FAIL.");
 				} else {
 					pareja.setId(id);
-					pareja.setEquipo(split[4]);
+
+					String equipo = "";
+					for (int i = 4; i < split.length; i++) {
+						if (i == split.length - 1) {
+							equipo += split[i];
+						} else {
+							equipo += split[i] + " ";
+						}
+					}
+
+					pareja.setEquipo(equipo);
 					int error = 0;
-					for (Pareja par: listaParejas) {
+					for (Pareja par : listaParejas) {
 						if (par.getId() == pareja.getId()) {
 							salida.println(comandos + ": FAIL.");
 							error = 1;
 						}
 					}
 
-					if(error == 0) {
+					if (error == 0) {
 						listaParejas.addLast(pareja);
 						salida.println(comandos + ": OK.");
 
 					}
-					
 
 				}
 				break;
@@ -222,7 +247,7 @@ public class Entrada {
 				break;
 			case "DumpPlayers":
 				int error2 = 0;
-				BufferedWriter writer=null;
+				BufferedWriter writer = null;
 				try {
 					writer = new BufferedWriter(new FileWriter(split[1]));
 				} catch (Exception e) {
@@ -232,7 +257,7 @@ public class Entrada {
 				}
 				for (Jugador jugador2 : listaJugadores) {
 					try {
-						writer.write(jugador2.toString()+"\n");
+						writer.write(jugador2.toString() + "\n");
 						writer.flush();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -242,126 +267,161 @@ public class Entrada {
 				}
 				for (Pareja pareja2 : listaParejas) {
 					try {
-						writer.write(pareja2.toString()+"\n");
+						writer.write(pareja2.toString() + "\n");
 						writer.flush();
 					} catch (Exception e) {
 						salida.println(comandos + ": FAIL.");
 						error2 = 1;
-					}						
+					}
 				}
 
-				if (error2 == 0){
+				if (error2 == 0) {
 					salida.println(comandos + ": OK.");
 				}
-					break;
-					case "ResetPlayers":
-						listaJugadores.clear();
-						listaParejas.clear();
-						listaParejasValidas.clear();
-						partida.setPareja1(null);
-						partida.setPareja2(null);
-						partida.setJugMano(null);
-						partida.setGanadores(null);
+				break;
+			case "ResetPlayers":
+				listaJugadores.clear();
+				listaParejas.clear();
+				listaParejasValidas.clear();
+				partida.setPareja1(null);
+				partida.setPareja2(null);
+				partida.setJugMano(null);
+				partida.setGanadores(null);
 
-						salida.println(comandos + ": OK.");
+				salida.println(comandos + ": OK.");
 
-					break;
-					case "LoadPlayers":
-						try {
-							leerFichJugadoresComandos(split[1],listaJugadores, listaParejas, listaParejasValidas);
-							salida.println(comandos + ": OK.");
-						} catch (Exception e) {
-							salida.println(comandos + ": FAIL.");
-						}
-						
-					break;
-					case "GenerateRandomDelivery":
-						String njug = split[1];
-						String idMano = split[2];
-						String fichJug = split[3];
-						if((partida.getPareja1() == null || partida.getPareja2() == null)){
+				break;
+			case "LoadPlayers":
+				try {
+					leerFichJugadoresComandos(split[1], listaJugadores, listaParejas, listaParejasValidas);
+					salida.println(comandos + ": OK.");
+				} catch (Exception e) {
+					salida.println(comandos + ": FAIL.");
+				}
 
+				break;
+			case "GenerateRandomDelivery":
+				String njug = split[1];
+				String idMano = split[2];
+				String fichJug = split[3];
+				if ((partida.getPareja1() == null || partida.getPareja2() == null)) {
 
-						}
-						String jugadas = partida.getBaraja().generarJugadas(idMano, njug);
-						try {
-							BufferedWriter writer2 = new BufferedWriter(new FileWriter(fichJug));
-							writer2.write(jugadas);
-							writer2.close();
-						} catch (Exception e) {
-							//TODO: handle exception
-						}
-						//partida.mostrarManosJugadores();
-					break;
-					case "PlayHand":
-						String jugada = comandos.substring(8).trim();
-						Entrada.jugadas.addLast(jugada);
+				}
+				String jugadas = partida.getBaraja().generarJugadas(idMano, njug);
+				try {
+					BufferedWriter writer2 = new BufferedWriter(new FileWriter(fichJug));
+					writer2.write(jugadas);
+					writer2.close();
+					salida.println(comandos + ": OK.");
+
+				} catch (Exception e) {
+					salida.println(comandos + ": FAIL.");
+				}
+				// partida.mostrarManosJugadores();
+				break;
+			case "PlayHand":
+				String jugada = comandos.substring(8).trim();
+				Entrada.jugadas.addLast(jugada);
+				partida.crearJugadores();
+				partida.setJugadas(partida.getJugadas() + 1);
+
+				partida.getBaraja().restablecerBaraja();
+				Entrada.leerFichJugadas(partida);
+
+				Lances lances = new Lances();
+				lances.setSalida(salida);
+				lances.setData(partida.getPareja1(), partida.getPareja2());
+
+				lances.nextMano(partida.getJugMano());
+				salida.print(comandos + ": ");
+				lances.resuelveGrande();
+				salida.print(", ");
+				lances.resuelveChica();
+				salida.print(", ");
+				lances.resuelvePares();
+				salida.print(", ");
+				lances.resuelveJuegoComandos();
+
+				salida.print("\n");
+				break;
+			case "ResolveGrande":
+				String jugada2 = comandos.substring(14).trim();
+				Entrada.jugadas.addLast(jugada2);
+				partida.crearJugadores();
+				partida.setJugadas(partida.getJugadas() + 1);
+
+				partida.getBaraja().restablecerBaraja();
+				Entrada.leerFichJugadas(partida);
+
+				Lances lances2 = new Lances();
+				lances2.setSalida(salida);
+				lances2.setData(partida.getPareja1(), partida.getPareja2());
+
+				lances2.nextMano(partida.getJugMano());
+				salida.print(comandos + ": ");
+				lances2.resuelveGrandeComandos();
+				salida.print("\n");
+
+				break;
+			case "ResolveChica":
+				String chica = comandos.substring(13).trim();
+				Entrada.jugadas.addLast(chica);
+				partida.crearJugadores();
+				partida.setJugadas(partida.getJugadas() + 1);
+
+				partida.getBaraja().restablecerBaraja();
+				Entrada.leerFichJugadas(partida);
+
+				Lances lanceChica = new Lances();
+				lanceChica.setSalida(salida);
+				lanceChica.setData(partida.getPareja1(), partida.getPareja2());
+
+				lanceChica.nextMano(partida.getJugMano());
+				salida.print(comandos + ": ");
+				lanceChica.resuelveChicaComandos();
+				salida.print("\n");
+
+				break;
+			case "ResolvePares":
+
+				break;
+			case "ResolveJuego":
+
+				break;
+
+			case "PlayGame":
+				if (listaParejasValidas.size() >= 2) {
+					partida.setPareja1(listaParejasValidas.get(0));
+					partida.setPareja2(listaParejasValidas.get(1));
+
+				} else {
+					if (partida.getPareja1() == null || partida.getPareja2() == null) {
 						partida.crearJugadores();
-						partida.setJugadas(partida.getJugadas() +1);
+					}
+				}
 
-						partida.getBaraja().restablecerBaraja();
-						Entrada.leerFichJugadas(partida);
+				BufferedWriter aux = salida.getWriter();
+				String[] args = { "-j", split[1], "-o", split[2] };
 
-						Lances lances = new Lances();
-						lances.setSalida(salida);
-						lances.setData(partida.getPareja1(), partida.getPareja2());
+				Entrada.jugadas.clear();
+				partida.setJugadas(0);
 
-						lances.nextMano(partida.getJugMano());
-						salida.print(comandos + ": ");
-						lances.resuelveGrande();
-						salida.print(", ");
-						lances.resuelveChica();
-						salida.print(", ");
-						lances.resuelvePares();
-						salida.print(", ");
-						lances.resuelveJuegoComandos();
-						
-						salida.print("\n");
-						break;
-					case "ResolveGrande":
-					String jugada2 = comandos.substring(14).trim();
-						Entrada.jugadas.addLast(jugada2);
-						partida.crearJugadores();
-						partida.setJugadas(partida.getJugadas() +1);
+				leerArgs(args, salida, partida);
+				partida.juegoPreestablecido();
+				salida.setWriter(aux);
 
-						partida.getBaraja().restablecerBaraja();
-						Entrada.leerFichJugadas(partida);
+				salida.println(comandos + ": OK.");
 
-						Lances lances2 = new Lances();
-						lances2.setSalida(salida);
-						lances2.setData(partida.getPareja1(), partida.getPareja2());
+				break;
 
-						lances2.nextMano(partida.getJugMano());
-						salida.print(comandos + ": ");
-						lances2.resuelveGrandeComandos();
-						salida.print("\n");
-						
-					break;
-					case "ResolveChica":
-					String chica = comandos.substring(13).trim();
-						Entrada.jugadas.addLast(chica);
-						partida.crearJugadores();
-						partida.setJugadas(partida.getJugadas() +1);
+			default:
+				if (comandos.charAt(0) == '#') {
+					// nada
+				} else {
+					salida.println("Comando erroneo");
+				}
 
-						partida.getBaraja().restablecerBaraja();
-						Entrada.leerFichJugadas(partida);
-
-						Lances lanceChica = new Lances();
-						lanceChica.setSalida(salida);
-						lanceChica.setData(partida.getPareja1(), partida.getPareja2());
-
-						lanceChica.nextMano(partida.getJugMano());
-						salida.print(comandos + ": ");
-						lanceChica.resuelveChicaComandos();
-						salida.print("\n");
-					
-					break;
-					case "ResolvePares":
-					
-					break;
-					case "ResolveJuego":
-					
-					break;
+				break;
 			}
 		}
 
@@ -378,7 +438,7 @@ public class Entrada {
 			String line = reader.readLine();
 
 			while (line != null) {
-				////System.out.println(line);
+				//// System.out.println(line);
 
 				if (line.charAt(0) == 'J') {
 					Jugador jug = new Jugador();
@@ -386,26 +446,25 @@ public class Entrada {
 					String nombre = "";
 
 					for (int i = 2; i < array.length; i++) {
-						if( i == array.length -1) {
+						if (i == array.length - 1) {
 							nombre = nombre + "" + array[i];
 						} else {
 							nombre = nombre + "" + array[i] + " ";
 
 						}
 					}
-					
 
 					jug.setId(Integer.parseInt(array[1]));
 					jug.setNombre(nombre);
 
 					int añadido = 0;
-					for (Jugador jugador: jugadores) {
+					for (Jugador jugador : jugadores) {
 						if (jugador.getId() == jug.getId()) {
 							jugadores.remove(jugador);
 							jugadores.addLast(jug);
 
 							añadido = 1;
-						}	
+						}
 					}
 
 					if (añadido != 1) {
@@ -419,7 +478,7 @@ public class Entrada {
 					String nombre = "";
 
 					for (int i = 4; i < array.length; i++) {
-						if( i == array.length -1) {
+						if (i == array.length - 1) {
 							nombre = nombre + "" + array[i];
 						} else {
 							nombre = nombre + "" + array[i] + " ";
@@ -436,30 +495,26 @@ public class Entrada {
 
 							pareja.setJug1(jug);
 						} else if (Integer.parseInt(array[3]) == jug.getId()) {
-							//System.out.println("Encontrado jug2");
+							// System.out.println("Encontrado jug2");
 
 							jug.setPareja(pareja);
 
 							pareja.setJug2(jug);
-						}		
+						}
 					}
 
 					if (pareja.getJug1() == null || pareja.getJug2() == null) {
-					//	System.out.println("Pareja con al menos un jug null");
-
+						// System.out.println("Pareja con al menos un jug null");
 
 					} else {
 						parejas.addLast(pareja);
 
 					}
 
-
-
 				}
 
-
 				line = reader.readLine();
-	
+
 			}
 			reader.close();
 
@@ -470,9 +525,10 @@ public class Entrada {
 				if (i == 0) {
 					parejasValidas.addLast(pareja);
 				} else {
-					if (pareja.getJug1().equals(parejas.get(i-1).getJug1()) || pareja.getJug2().equals(parejas.get(i-1).getJug2())) {
+					if (pareja.getJug1().equals(parejas.get(i - 1).getJug1())
+							|| pareja.getJug2().equals(parejas.get(i - 1).getJug2())) {
 						// Algún jugador repetido, pareja no válida
-					//	System.out.println("Jugador repetido, pareja no valida");
+						// System.out.println("Jugador repetido, pareja no valida");
 						parejas.remove(i);
 						i--;
 					} else {
@@ -489,16 +545,15 @@ public class Entrada {
 				}
 			}
 
-			
 		} catch (Exception e) {
-			//TODO: handle exception
+			// TODO: handle exception
 			throw new Exception(e.toString());
 		}
 
 	}
 
-
-	public static void leerFichJugadoresComandos(String fich, LinkedList<Jugador> jugs, LinkedList<Pareja> pars, LinkedList<Pareja> parsValidas) throws Exception {
+	public static void leerFichJugadoresComandos(String fich, LinkedList<Jugador> jugs, LinkedList<Pareja> pars,
+			LinkedList<Pareja> parsValidas) throws Exception {
 		LinkedList<Jugador> jugadores = jugs;
 		LinkedList<Pareja> parejas = pars;
 		LinkedList<Pareja> parejasValidas = parsValidas;
@@ -509,7 +564,7 @@ public class Entrada {
 			String line = reader.readLine();
 
 			while (line != null) {
-				////System.out.println(line);
+				//// System.out.println(line);
 
 				if (line.charAt(0) == 'J') {
 					Jugador jug = new Jugador();
@@ -517,26 +572,25 @@ public class Entrada {
 					String nombre = "";
 
 					for (int i = 2; i < array.length; i++) {
-						if( i == array.length -1) {
+						if (i == array.length - 1) {
 							nombre = nombre + "" + array[i];
 						} else {
 							nombre = nombre + "" + array[i] + " ";
 
 						}
 					}
-					
 
 					jug.setId(Integer.parseInt(array[1]));
 					jug.setNombre(nombre);
 
 					int añadido = 0;
-					for (Jugador jugador: jugadores) {
+					for (Jugador jugador : jugadores) {
 						if (jugador.getId() == jug.getId()) {
 							jugadores.remove(jugador);
 							jugadores.addLast(jug);
 
 							añadido = 1;
-						}	
+						}
 					}
 
 					if (añadido != 1) {
@@ -550,7 +604,7 @@ public class Entrada {
 					String nombre = "";
 
 					for (int i = 4; i < array.length; i++) {
-						if( i == array.length -1) {
+						if (i == array.length - 1) {
 							nombre = nombre + "" + array[i];
 						} else {
 							nombre = nombre + "" + array[i] + " ";
@@ -567,30 +621,26 @@ public class Entrada {
 
 							pareja.setJug1(jug);
 						} else if (Integer.parseInt(array[3]) == jug.getId()) {
-							//System.out.println("Encontrado jug2");
+							// System.out.println("Encontrado jug2");
 
 							jug.setPareja(pareja);
 
 							pareja.setJug2(jug);
-						}		
+						}
 					}
 
 					if (pareja.getJug1() == null || pareja.getJug2() == null) {
-					//	System.out.println("Pareja con al menos un jug null");
-
+						// System.out.println("Pareja con al menos un jug null");
 
 					} else {
 						parejas.addLast(pareja);
 
 					}
 
-
-
 				}
 
-
 				line = reader.readLine();
-	
+
 			}
 			reader.close();
 
@@ -601,9 +651,10 @@ public class Entrada {
 				if (i == 0) {
 					parejasValidas.addLast(pareja);
 				} else {
-					if (pareja.getJug1().equals(parejas.get(i-1).getJug1()) || pareja.getJug2().equals(parejas.get(i-1).getJug2())) {
+					if (pareja.getJug1().equals(parejas.get(i - 1).getJug1())
+							|| pareja.getJug2().equals(parejas.get(i - 1).getJug2())) {
 						// Algún jugador repetido, pareja no válida
-					//	System.out.println("Jugador repetido, pareja no valida");
+						// System.out.println("Jugador repetido, pareja no valida");
 						parejas.remove(i);
 						i--;
 					} else {
@@ -612,53 +663,50 @@ public class Entrada {
 				}
 			}
 
-			
 		} catch (Exception e) {
-			//TODO: handle exception
+			// TODO: handle exception
 			throw new Exception(e.toString());
-		}	
+		}
 
 	}
 
+	public static void opcionalArgs(LinkedList<String> auxArgs, Salida salida, Partida partida) {
 
-	public void opcionalArgs(LinkedList<String> auxArgs, Salida salida, Partida partida){
-
-		if (auxArgs.get(0).equals("-p")){
+		if (auxArgs.get(0).equals("-p")) {
 			try {
 				leerFichJugadores(auxArgs.get(1), partida);
-				
+
 			} catch (Exception e) {
-				//TODO: handle exception
+				// TODO: handle exception
 			}
 
 			try {
-				if (auxArgs.get(2).equals("-o")){
+				if (auxArgs.get(2).equals("-o")) {
 					try {
 						salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(3))));
 
 					} catch (Exception e) {
-						//TODO: handle exception
+						// TODO: handle exception
 					}
-				} 
-				
+				}
+
 			} catch (Exception e) {
 			}
-			
 
 		} else {
-			if (auxArgs.get(0).equals("-o")){
+			if (auxArgs.get(0).equals("-o")) {
 				try {
 					salida.setWriter(new BufferedWriter(new FileWriter(auxArgs.get(1))));
 
 				} catch (Exception e) {
-					//TODO: handle exception
+					// TODO: handle exception
 				}
-			} 
-	
+			}
+
 		}
 	}
 
-	public void guardarJugadas() {
+	public static void guardarJugadas() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(ficheroJugadas));
 

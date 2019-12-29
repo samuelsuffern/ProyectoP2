@@ -70,7 +70,7 @@ public class Lances {
 				pareja1.addPiedras(3);
 //				resPartida("Grande 3 0 ");
 
-				salida.print("Grande 3 0 ");
+				salida.print("Grande 3 0");
 
 				ganador = 1;
 			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
@@ -79,7 +79,7 @@ public class Lances {
 
 				ganador = 1;
 
-				salida.print("Grande 3 0 ");
+				salida.print("Grande 3 0");
 
 				//salida.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
@@ -87,7 +87,7 @@ public class Lances {
 				// resPartida("Grande 0 3 ");
 
 				ganador = 1;
-				salida.print("Grande 0 3 ");
+				salida.print("Grande 0 3");
 
 				//salida.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
@@ -96,7 +96,7 @@ public class Lances {
 
 				ganador = 1;
 
-				salida.print("Grande 0 3 ");
+				salida.print("Grande 0 3");
 
 				//salida.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
 			} else { // empate
@@ -125,7 +125,9 @@ public class Lances {
 
 				default:
 					ganador = 1;
-					// resPartida("Grande 0 0 ");
+					pareja1.addPiedras(1);
+					pareja2.addPiedras(1);
+					salida.print("Grande 1 1");
 					break;
 				}
 
@@ -227,8 +229,21 @@ public class Lances {
 					break;
 
 				default:
-					ganador = 1;
-					// resPartida("Grande 0 0 ");
+				ganador = 1;
+				if (par1.get(0) > par1.get(1)) {
+					if (par2.get(0) > par2.get(1)) {
+						salida.print("1 1 0 0 - 1 1");
+					} else {
+						salida.print("1 0 0 1 - 1 1");
+					}
+				} else {
+					if (par2.get(0) > par2.get(1)) {
+						salida.print("0 1 1 0 - 1 1");
+					} else {
+						salida.print("0 0 1 1 - 1 1");
+					}
+
+				}
 					break;
 				}
 
@@ -278,7 +293,7 @@ public class Lances {
 				pareja1.addPiedras(3);
 				// resPartida("Chica 3 0\n");
 
-				salida.print("Chica 3 0 ");
+				salida.print("Chica 3 0");
 
 				//salida.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
 
@@ -288,7 +303,7 @@ public class Lances {
 				// resPartida("Chica 3 0\n");
 
 				ganador = 1;
-				salida.print("Chica 3 0 ");
+				salida.print("Chica 3 0");
 
 				//salida.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
 			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
@@ -296,7 +311,7 @@ public class Lances {
 				// resPartida("Chica 0 3\n");
 
 				ganador = 1;
-				salida.print("Chica 0 3 ");
+				salida.print("Chica 0 3");
 
 				//salida.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
 			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
@@ -305,7 +320,7 @@ public class Lances {
 
 				ganador = 1;
 
-				salida.print("Chica 0 3 ");
+				salida.print("Chica 0 3");
 
 				//salida.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
 			} else { // empate
@@ -334,7 +349,10 @@ public class Lances {
 
 				default:
 					ganador = 1;
-					// resPartida("Chica 0 0\n");
+					pareja1.addPiedras(1);
+					pareja2.addPiedras(1);
+					salida.print("Chica 1 1");
+				// resPartida("Chica 0 0\n");
 					break;
 				}
 
@@ -453,6 +471,20 @@ public class Lances {
 
 				default:
 					ganador = 1;
+					if (par1.get(0) > par1.get(1)) {
+						if (par2.get(0) > par2.get(1)) {
+							salida.print("1 1 0 0 - 1 1");
+						} else {
+							salida.print("1 0 0 1 - 1 1");
+						}
+					} else {
+						if (par2.get(0) > par2.get(1)) {
+							salida.print("0 1 1 0 - 1 1");
+						} else {
+							salida.print("0 0 1 1 - 1 1");
+						}
+	
+					}
 					// resPartida("Chica 0 0\n");
 					break;
 				}
@@ -475,7 +507,7 @@ public class Lances {
 		piedrasP2 += cuentaPares(pareja2.getJug1().getMano().getBarajaList());
 		piedrasP2 += cuentaPares(pareja2.getJug2().getMano().getBarajaList());
 
-		salida.print("Pares " + piedrasP1 + " " + piedrasP2 + " ");
+		salida.print("Pares " + piedrasP1 + " " + piedrasP2);
 		pareja1.addPiedras(piedrasP1);
 		pareja2.addPiedras(piedrasP2);
 
@@ -745,11 +777,18 @@ public class Lances {
 				jugMano.getPareja().addPiedras(2);
 
 				int piedrasP1 = 0;
+				int piedrasP2 = 0;
+
+				if (pareja1.equals(jugMano.getPareja())) {
+					piedrasP1 = 2;
+				} else {
+					piedrasP2 = 2;
+
+				}
 
 				piedrasP1 += piedrasJuegos(juegoP1J1);
 				piedrasP1 += piedrasJuegos(juegoP1J2);
 
-				int piedrasP2 = 0;
 				piedrasP2 += piedrasJuegos(juegoP2J1);
 				piedrasP2 += piedrasJuegos(juegoP2J2);
 

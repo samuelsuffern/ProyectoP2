@@ -90,6 +90,10 @@ public class Salida{
       
     }
 
+    public BufferedWriter getWriter(){
+        return writer;
+    }
+
     
 	
 
