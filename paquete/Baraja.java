@@ -109,6 +109,48 @@ public class Baraja {
 	/*
 	 * Funcion que reparte n cartas y devuelve las cartas repartidas
 	 */
+
+	public String generarJugadas(String idMano, String nJug){
+		String jugada="";
+		int mano = Integer.parseInt(idMano);
+		int jugadas = Integer.parseInt(nJug);
+		
+		for (int k = 0; k < jugadas; k++) {
+			restablecerBaraja();
+			Collections.shuffle(baraja);
+			
+			for (int j = 1; j < 5; j++) {
+				if(j==mano){
+					jugada+="*(";
+				}else{
+					jugada+="-(";
+				}
+				for (int i = 1; i < 5; i++) {
+					Carta carta = baraja.getLast();
+					
+					jugada+= carta.getId() + "" + carta.getPalo();
+					if(i==4){
+						jugada+=")";
+					}else{
+						jugada+=", ";
+					}
+					
+					baraja.removeLast();
+				}
+	
+				
+			}
+		
+			jugada += "\n";
+			if (mano == 4){
+				mano = 1;
+			} else {
+				mano++;
+			}
+		}
+		
+		return jugada;
+	}
 	public Baraja repartir(int n, Partida partida) {
 		Baraja barajajug = new Baraja();
 
@@ -118,7 +160,7 @@ public class Baraja {
 		} else if (baraja.size() < n) {
 
 			restablecerBaraja();
-
+			
 			for (Integer i = 0; i < n; i++) {
 
 				// salida.println("Carta: " + carta.getId() + "" + carta.getPalo() + " --
@@ -140,7 +182,6 @@ public class Baraja {
 		}
 		
 		return barajajug;
-
 	}
 
 	/*

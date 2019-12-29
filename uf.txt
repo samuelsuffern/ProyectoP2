@@ -1,7 +1,6 @@
 J 666 Pepa Pérez Altinova Matalobos
 J 777 Jon Nieve
 J 4 Antonio Melero
-P 666 666 777 Los Mejores
-P 555 4 777 Los Segundos Mejores
 J 5 Ana María Toledano
+P 666 666 777 Los Mejores
 P 77 4 5 Las Notas

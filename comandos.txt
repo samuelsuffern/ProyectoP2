@@ -1,0 +1,15 @@
+DeletePlayer 1
+NewPlayer 1 hola
+NewPlayer 5 hola
+NewPlayer 2 hola
+NewPlayer 4 samu
+NewCouple 777 999 222 hola
+NewCouple 7 5 1 hola
+NewCouple 23 4 2 yeah
+ResetPlayers
+LoadPlayers jugadores.txt
+DumpPlayers uf.txt
+GenerateRandomDelivery 6 1 fichjugadas.txt
+PlayHand -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
+ResolveGrande -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
+ResolveChica -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)

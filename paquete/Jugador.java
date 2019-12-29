@@ -1,12 +1,18 @@
 package paquete;
 
 public class Jugador {
-	 private Integer id;
-	    private String nombre;
-	    private Baraja mano = new Baraja(); 
-	    private Pareja miPareja; 
-
-
+	private Integer id;
+	private String nombre;
+	private Baraja mano = new Baraja(); 
+	private Pareja miPareja; 
+	
+	
+	public Jugador(Integer id, String nombre) {
+		this.id = id;
+		this.nombre = nombre;
+	
+	}
+	public Jugador(){}
 		/*
 	     * Getters & Setters
 	     */
@@ -41,5 +47,9 @@ public class Jugador {
 	    public void setMano(Baraja mano) {
 	        this.mano = mano;
 	    }
+		@Override
+		public String toString() {
+			return "J "+id+" "+nombre;
+		}
 
 }

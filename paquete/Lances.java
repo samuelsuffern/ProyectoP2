@@ -7,23 +7,23 @@ public class Lances {
 	private Pareja pareja1;
 	private Pareja pareja2;
     private Jugador jugMano;
-    
+
 
     public void setSalida(Salida salida){
         this.salida = salida;
 
     }
-    
+
     public void setData(Pareja pareja1, Pareja pareja2){
         this.pareja1 = pareja1;
         this.pareja2 = pareja2;
-        
+
     }
 
     public void nextMano(Jugador jugador){
         this.jugMano = jugador;
     }
-    
+
 
     public int piedrasJuegos(Integer juego) {
 		if (juego == 1) {
@@ -31,11 +31,10 @@ public class Lances {
 		}else if (juego != 9) {
 			return 2;
 		}
-		
+
 		return 0;
 	}
-	
-    
+
 
     public void resuelveGrande() {
 
@@ -140,8 +139,111 @@ public class Lances {
 
 	}
 
+    public void resuelveGrandeComandos() {
+
+		Baraja mano11 = pareja1.getJug1().getMano();
+
+		Baraja mano12 = pareja1.getJug2().getMano();
+		Baraja mano21 = pareja2.getJug1().getMano();
+		Baraja mano22 = pareja2.getJug2().getMano();
+
+		int ganador = 0;
+		int valor = 1;
+		char grande = 'R';
+
+		while (ganador == 0) {
+			LinkedList<Integer> par1 = new LinkedList<Integer>();
+			LinkedList<Integer> par2 = new LinkedList<Integer>();
+
+			int numero = calculaNumCartas(mano11, grande);
+			par1.add(numero);
+			numero = calculaNumCartas(mano12, grande);
+			par1.add(numero);
+			numero = calculaNumCartas(mano21, grande);
+			par2.add(numero);
+			numero = calculaNumCartas(mano22, grande);
+			par2.add(numero);
+
+			/*
+			 * Tenemos que comprobar que pareja gana en funcion del lance de grande
+			 */
+
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
+
+				pareja1.addPiedras(3);
+//				resPartida("Grande 3 0 ");
+
+				salida.print("3 0 0 0 - 3 0");
+
+				ganador = 1;
+			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
+				pareja1.addPiedras(3);
+//				resPartida("Grande 3 0 ");
+
+				ganador = 1;
+
+				salida.print("0 0 3 0 - 3 0");
+
+				//salida.println("Gana j12 por grande: " + par1.get(1) + "," + grande);
+			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
+				pareja2.addPiedras(3);
+				// resPartida("Grande 0 3 ");
+
+				ganador = 1;
+				salida.print("0 3 0 0 - 0 3");
+
+				//salida.println("Gana j21 por grande: " + par2.get(0) + "," + grande);
+			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
+				pareja2.addPiedras(3);
+				// resPartida("Grande 0 3 ");
+
+				ganador = 1;
+
+				salida.print("0 0 0 3 - 0 3");
+
+				//salida.println("Gana j22 por grande: " + par2.get(1) + "," + grande);
+			} else { // empate
+				switch (valor) {
+				case 1:
+					grande = 'C';
+					break;
+				case 2:
+					grande = 'S';
+					break;
+				case 3:
+					grande = '7';
+					break;
+				case 4:
+					grande = '6';
+					break;
+				case 5:
+					grande = '5';
+					break;
+				case 6:
+					grande = '4';
+					break;
+				case 7:
+					grande = '1';
+					break;
+
+				default:
+					ganador = 1;
+					// resPartida("Grande 0 0 ");
+					break;
+				}
+
+				if (ganador == 0) {
+					valor++;
+					ganador = 0;
+				}
+			}
+
+		}
+
+	}
+
 	/*
-	 * 
+	 *
 	 */
 
 	public void resuelveChica() {
@@ -246,6 +348,125 @@ public class Lances {
 
 	} // FIN RESUELVECHICA()
 
+
+	public void resuelveChicaComandos() {
+		Baraja mano11 = pareja1.getJug1().getMano();
+		Baraja mano12 = pareja1.getJug2().getMano();
+		Baraja mano21 = pareja2.getJug1().getMano();
+		Baraja mano22 = pareja2.getJug2().getMano();
+
+		int ganador = 0;
+		int valor = 1;
+		char chica = '1';
+
+		while (ganador == 0) {
+			LinkedList<Integer> par1 = new LinkedList<Integer>();
+			LinkedList<Integer> par2 = new LinkedList<Integer>();
+
+			int numero = calculaNumCartas(mano11, chica);
+			par1.add(numero);
+			numero = calculaNumCartas(mano12, chica);
+			par1.add(numero);
+			numero = calculaNumCartas(mano21, chica);
+			par2.add(numero);
+			numero = calculaNumCartas(mano22, chica);
+			par2.add(numero);
+
+			/*
+			 * Tenemos que comprobar que pareja gana en funcion del lance de chica
+			 */
+
+			if (par1.get(0) > par2.get(0) && par1.get(0) > par2.get(1)) { // gana la pareja1
+
+				pareja1.addPiedras(3);
+				// resPartida("Chica 3 0\n");
+				if (par1.get(0) > par1.get(1)) {
+					salida.print("3 0 0 0 - 3 0");
+
+				} else {
+					salida.print("0 0 3 0 - 3 0");
+				}
+
+				//salida.println("Gana j11 por chica: " + par1.get(0) + "," + chica);
+
+				ganador = 1;
+			} else if (par1.get(1) > par2.get(0) && par1.get(1) > par2.get(1)) {
+				pareja1.addPiedras(3);
+				// resPartida("Chica 3 0\n");
+
+				ganador = 1;
+				if (par1.get(0) > par1.get(1)) {
+					salida.print("3 0 0 0 - 3 0");
+
+				} else {
+					salida.print("0 0 3 0 - 3 0");
+				}
+				//salida.println("Gana j12 por chica: " + par1.get(1) + "," + chica);
+			} else if (par2.get(0) > par1.get(0) && par2.get(0) > par1.get(1)) {
+				pareja2.addPiedras(3);
+				// resPartida("Chica 0 3\n");
+
+				ganador = 1;
+				if (par2.get(0) > par2.get(1)) {
+					salida.print("0 3 0 0 - 0 3");
+
+				} else {
+					salida.print("0 0 0 3 - 0 3");
+				}
+				//salida.println("Gana j21 por chica: " + par2.get(0) + "," + chica);
+			} else if (par2.get(1) > par1.get(0) && par2.get(1) > par1.get(1)) {
+				pareja2.addPiedras(3);
+				// resPartida("Chica 0 3\n");
+
+				ganador = 1;
+
+				if (par2.get(0) > par2.get(1)) {
+					salida.print("0 3 0 0 - 0 3");
+
+				} else {
+					salida.print("0 0 0 3 - 0 3");
+				}
+				//salida.println("Gana j22 por chica: " + par2.get(1) + "," + chica);
+			} else { // empate
+				switch (valor) {
+				case 1:
+					chica = '4';
+					break;
+				case 2:
+					chica = '5';
+					break;
+				case 3:
+					chica = '6';
+					break;
+				case 4:
+					chica = '7';
+					break;
+				case 5:
+					chica = 'S';
+					break;
+				case 6:
+					chica = 'C';
+					break;
+				case 7:
+					chica = 'R';
+					break;
+
+				default:
+					ganador = 1;
+					// resPartida("Chica 0 0\n");
+					break;
+				}
+
+				if (ganador == 0) {
+					valor++;
+					ganador = 0;
+				}
+			}
+
+		}
+
+	} // FIN RESUELVECHICA()
+
 	public void resuelvePares() {
 		int piedrasP1 = 0;
 		int piedrasP2 = 0;
@@ -253,7 +474,7 @@ public class Lances {
 		piedrasP1 += cuentaPares(pareja1.getJug2().getMano().getBarajaList());
 		piedrasP2 += cuentaPares(pareja2.getJug1().getMano().getBarajaList());
 		piedrasP2 += cuentaPares(pareja2.getJug2().getMano().getBarajaList());
-		
+
 		salida.print("Pares " + piedrasP1 + " " + piedrasP2 + " ");
 		pareja1.addPiedras(piedrasP1);
 		pareja2.addPiedras(piedrasP2);
@@ -261,22 +482,22 @@ public class Lances {
 	} // fin resuelvePares()
 
 
-    
+
 	public void resuelveJuego(){
 		int puntosP1J1 = 0,puntosP1J2,puntosP2J1 = 0,puntosP2J2=0;
 		int juegoP1J1=0,juegoP1J2=0,juegoP2J1=0,juegoP2J2=0;
 
 		puntosP1J1= pareja1.getJug1().getMano().getPuntos();
 		juegoP1J1 = calculaJuego(puntosP1J1);
-		
+
 		puntosP1J2=pareja1.getJug2().getMano().getPuntos();
 		juegoP1J2 = calculaJuego(puntosP1J2);
 		puntosP2J1=pareja2.getJug1().getMano().getPuntos();
 		juegoP2J1 = calculaJuego(puntosP2J1);
 		puntosP2J2=pareja2.getJug2().getMano().getPuntos();
 		juegoP2J2 = calculaJuego(puntosP2J2);
-		
-	
+
+
 		if(juegoP1J1 < juegoP2J1 && juegoP1J1 < juegoP2J2) {
 			int piedrasP1 = 2;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -290,9 +511,9 @@ public class Lances {
 
 			pareja2.addPiedras(piedrasP2);
 
-			
+
 			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
-			
+
 		}else if(juegoP1J2 < juegoP2J1 && juegoP1J2 < juegoP2J2) {
 			int piedrasP1 = 2;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -303,13 +524,13 @@ public class Lances {
 			int piedrasP2 = 0;
 			piedrasP2 += piedrasJuegos(juegoP2J1);
 			piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 			pareja2.addPiedras(piedrasP2);
 
 			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-			
-		
+
+
 		}else if(juegoP2J1 < juegoP1J1 && juegoP2J1 < juegoP1J2) {
 			int piedrasP1 = 0;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -320,12 +541,12 @@ public class Lances {
 			int piedrasP2 = 2;
 			piedrasP2 += piedrasJuegos(juegoP2J1);
 			piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 			pareja2.addPiedras(piedrasP2);
 
 			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-			
+
 		}else if(juegoP2J2 < juegoP1J1 && juegoP2J2 < juegoP1J2) {
 			int piedrasP1 = 0;
 			piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -336,14 +557,14 @@ public class Lances {
 			int piedrasP2 = 2;
 			piedrasP2 += piedrasJuegos(juegoP2J1);
 			piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 			pareja2.addPiedras(piedrasP2);
 
 			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-			
+
 		} else {
-			
+
 			if(juegoP1J1 + juegoP1J2 < juegoP2J1 + juegoP2J2) {
 				int piedrasP1 = 2;
 				piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -354,12 +575,12 @@ public class Lances {
 				int piedrasP2 = 0;
 				piedrasP2 += piedrasJuegos(juegoP2J1);
 				piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 				pareja2.addPiedras(piedrasP2);
 
 				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-					
+
 			} else if (juegoP2J1 + juegoP2J2 < juegoP1J1 + juegoP1J2) {
 				int piedrasP1 = 0;
 				piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -370,15 +591,15 @@ public class Lances {
 				int piedrasP2 = 2;
 				piedrasP2 += piedrasJuegos(juegoP2J1);
 				piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 				pareja2.addPiedras(piedrasP2);
 
 				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-								
+
 			} else {
 				jugMano.getPareja().addPiedras(2);
-				
+
 				int piedrasP1 = 0;
 
 				piedrasP1 += piedrasJuegos(juegoP1J1);
@@ -387,26 +608,168 @@ public class Lances {
 				int piedrasP2 = 0;
 				piedrasP2 += piedrasJuegos(juegoP2J1);
 				piedrasP2 += piedrasJuegos(juegoP2J2);
-			
+
 				pareja1.addPiedras(piedrasP1);
 				pareja2.addPiedras(piedrasP2);
-				
-				
+
+
 
 				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-								
+
 			}
-			
+
 		}
-		
-		
+
+
 		salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
-		
-	
+
+
 	}
-	
-	
+
+	public void resuelveJuegoComandos(){
+		int puntosP1J1 = 0,puntosP1J2,puntosP2J1 = 0,puntosP2J2=0;
+		int juegoP1J1=0,juegoP1J2=0,juegoP2J1=0,juegoP2J2=0;
+
+		puntosP1J1= pareja1.getJug1().getMano().getPuntos();
+		juegoP1J1 = calculaJuego(puntosP1J1);
+
+		puntosP1J2=pareja1.getJug2().getMano().getPuntos();
+		juegoP1J2 = calculaJuego(puntosP1J2);
+		puntosP2J1=pareja2.getJug1().getMano().getPuntos();
+		juegoP2J1 = calculaJuego(puntosP2J1);
+		puntosP2J2=pareja2.getJug2().getMano().getPuntos();
+		juegoP2J2 = calculaJuego(puntosP2J2);
+
+
+		if(juegoP1J1 < juegoP2J1 && juegoP1J1 < juegoP2J2) {
+			int piedrasP1 = 2;
+			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
+			pareja1.addPiedras(piedrasP1);
+
+
+			int piedrasP2 = 0;
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
+
+			pareja2.addPiedras(piedrasP2);
+
+
+			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+		}else if(juegoP1J2 < juegoP2J1 && juegoP1J2 < juegoP2J2) {
+			int piedrasP1 = 2;
+			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
+			pareja1.addPiedras(piedrasP1);
+
+
+			int piedrasP2 = 0;
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
+
+			pareja2.addPiedras(piedrasP2);
+
+			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+
+		}else if(juegoP2J1 < juegoP1J1 && juegoP2J1 < juegoP1J2) {
+			int piedrasP1 = 0;
+			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
+			pareja1.addPiedras(piedrasP1);
+
+
+			int piedrasP2 = 2;
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
+
+			pareja2.addPiedras(piedrasP2);
+
+			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+		}else if(juegoP2J2 < juegoP1J1 && juegoP2J2 < juegoP1J2) {
+			int piedrasP1 = 0;
+			piedrasP1 += piedrasJuegos(juegoP1J1);
+			piedrasP1 += piedrasJuegos(juegoP1J2);
+			pareja1.addPiedras(piedrasP1);
+
+
+			int piedrasP2 = 2;
+			piedrasP2 += piedrasJuegos(juegoP2J1);
+			piedrasP2 += piedrasJuegos(juegoP2J2);
+
+			pareja2.addPiedras(piedrasP2);
+
+			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+		} else {
+
+			if(juegoP1J1 + juegoP1J2 < juegoP2J1 + juegoP2J2) {
+				int piedrasP1 = 2;
+				piedrasP1 += piedrasJuegos(juegoP1J1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
+				pareja1.addPiedras(piedrasP1);
+
+
+				int piedrasP2 = 0;
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
+
+				pareja2.addPiedras(piedrasP2);
+
+				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+			} else if (juegoP2J1 + juegoP2J2 < juegoP1J1 + juegoP1J2) {
+				int piedrasP1 = 0;
+				piedrasP1 += piedrasJuegos(juegoP1J1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
+				pareja1.addPiedras(piedrasP1);
+
+
+				int piedrasP2 = 2;
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
+
+				pareja2.addPiedras(piedrasP2);
+
+				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+			} else {
+				jugMano.getPareja().addPiedras(2);
+
+				int piedrasP1 = 0;
+
+				piedrasP1 += piedrasJuegos(juegoP1J1);
+				piedrasP1 += piedrasJuegos(juegoP1J2);
+
+				int piedrasP2 = 0;
+				piedrasP2 += piedrasJuegos(juegoP2J1);
+				piedrasP2 += piedrasJuegos(juegoP2J2);
+
+				pareja1.addPiedras(piedrasP1);
+				pareja2.addPiedras(piedrasP2);
+
+
+
+				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+
+
+			}
+
+		}
+
+
+
+	}
+
+
 	private int calculaJuego(int puntos) {
 		int juego=0;
 		switch (puntos) {
@@ -432,15 +795,15 @@ public class Lances {
 			juego=4;
 			break;
 		case 40:
-			juego=3;		
+			juego=3;
 			break;
 		default:
 			juego=9;
 			break;
-		}		
+		}
 		return juego;
 	}
-	
+
 
 	/*
 	 * Pares: 2 cartas iguales; Medias: 3 cartas iguales; Duplex: 2 parejas de
@@ -497,7 +860,7 @@ public class Lances {
 
 			//System.out.println("Nparejas: " + nParejas);
 
-			
+
 		}
 
 		if ( nParejas == 2) {

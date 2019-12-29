@@ -49,7 +49,7 @@ public class Pareja {
 	}
 
 	public String toString(){
-		return id + "-" + equipo + ": " + jug1.getNombre() + "_" + jug2.getNombre();
+		return "P " + id +" "+jug1.getId()+" "+jug2.getId() + " " + equipo;
 	}
 
 }

@@ -68,8 +68,50 @@ public class Partida {
 		return this.jugadas;
 	}
 
+	public void setJugadas(int jugadas) {
+		this.jugadas = jugadas;
+	}
+
 
 	// ----------------------------------------------- \\
+
+
+	public void completarEquipos(LinkedList<Pareja> parejasValidas) {
+		if (parejasValidas.size() == 0) {
+			crearJugadores();
+
+
+		} else if (parejasValidas.size() == 1) {
+
+			//System.out.println("Creamos pareja dos, solo habia");
+			Pareja pareja = new Pareja();
+			pareja.setEquipo("Pareja B");
+			pareja.setId(2);
+
+			Jugador jug1 = new Jugador();
+			jug1.setId(125);
+			jug1.setNombre("Jugador 1B");
+			jug1.setPareja(pareja);
+			pareja.setJug1(jug1);
+
+			Jugador jug2 = new Jugador();
+			jug2.setId(126);
+			jug2.setNombre("Jugador 2B");
+			jug2.setPareja(pareja);
+			pareja.setJug2(jug2);
+			
+			parejasValidas.addLast(pareja);
+			pareja2 = pareja;
+
+		} else {
+			//		System.out.println("Todo va correcto");
+
+			
+		}
+
+
+	}
+
 
 	// Control de juego \\
 
@@ -127,13 +169,19 @@ public class Partida {
 	}
 
 	public void juegoComandos(){
-
+		Entrada.leerComandos(this,salida);
 	}
 
 	public void juegoAutonomo(){
-		if (pareja1 == null && pareja2 == null) {
-			crearJugadores();
+		LinkedList<Pareja> parejas = new LinkedList<Pareja>(); 
+		if (pareja1 != null) {
+			parejas.addLast(pareja1);
 		}
+		if (pareja2 != null) {
+			parejas.addLast(pareja2);
+		}
+
+		completarEquipos(parejas);
 
 		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre());
 		salida.println(pareja2.getEquipo() + ": " + pareja2.getJug1().getNombre() + " y " + pareja2.getJug2().getNombre());
