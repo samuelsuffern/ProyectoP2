@@ -383,9 +383,44 @@ public class Entrada {
 
 				break;
 			case "ResolvePares":
+				String pares = comandos.substring(13).trim();
+				Entrada.jugadas.addLast(pares);
+				partida.crearJugadores();
+				partida.setJugadas(partida.getJugadas() + 1);
+
+				partida.getBaraja().restablecerBaraja();
+				Entrada.leerFichJugadas(partida);
+
+				Lances lancePares = new Lances();
+				lancePares.setSalida(salida);
+				lancePares.setData(partida.getPareja1(), partida.getPareja2());
+
+				lancePares.nextMano(partida.getJugMano());
+				salida.print(comandos + ": ");
+				lancePares.resuelveParesComandos();
+				salida.print("\n");
+
 
 				break;
 			case "ResolveJuego":
+				String juego = comandos.substring(13).trim();
+
+				Entrada.jugadas.addLast(juego);
+				partida.crearJugadores();
+				partida.setJugadas(partida.getJugadas() + 1);
+
+				partida.getBaraja().restablecerBaraja();
+				Entrada.leerFichJugadas(partida);
+
+				Lances lanceJuego = new Lances();
+				lanceJuego.setSalida(salida);
+				lanceJuego.setData(partida.getPareja1(), partida.getPareja2());
+
+				lanceJuego.nextMano(partida.getJugMano());
+				salida.print(comandos + ": ");
+				lanceJuego.resuelveJuegoComandos();
+				salida.print("\n");
+
 
 				break;
 
