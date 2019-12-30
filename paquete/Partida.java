@@ -129,7 +129,7 @@ public class Partida {
 
 		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre() + ".");
 		salida.println(pareja2.getEquipo() + ": " + pareja2.getJug1().getNombre() + " y " + pareja2.getJug2().getNombre() + ".");
-		salida.println("Mano: " + jugMano.getNombre() + ".\n");
+		salida.println("Mano: " + jugMano.getNombre() + ".");
 
 		lances.setData(pareja1, pareja2);
 		lances.nextMano(jugMano);
@@ -196,7 +196,7 @@ public class Partida {
 		generarMano();
 		lances.nextMano(jugMano);
 
-		salida.println("Mano: " + jugMano.getNombre() + ".\n");
+		salida.println("Mano: " + jugMano.getNombre() + ".");
 
 
 		while (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40){
