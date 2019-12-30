@@ -829,6 +829,7 @@ public class Lances {
 
 
 			} else {
+				
 				if (juegoP1J1 == 9 && juegoP1J2 == 9 && juegoP2J1 == 9 && juegoP2J2 == 9) {
 					int puntosJ1 = pareja1.getJug1().getMano().getPuntos();
 					int piedrasP1 = 0;
@@ -861,24 +862,42 @@ public class Lances {
 					jugMano.getPareja().addPiedras(2);
 					int piedrasP1 = 0;
 					int piedrasP2 = 0;
-					if (pareja1.equals(jugMano.getPareja())) {
-						piedrasP1 = 2;
-					} else {
-						piedrasP2 = 2;
-	
-					}
+
 					piedrasP1 += piedrasJuegos(juegoP1J1);
 					piedrasP1 += piedrasJuegos(juegoP1J2);
 	
 					piedrasP2 += piedrasJuegos(juegoP2J1);
 					piedrasP2 += piedrasJuegos(juegoP2J2);
+
+					if (pareja1.equals(jugMano.getPareja())) {
+						piedrasP1 += 2;
+						if (piedrasJuegos(juegoP1J1) > piedrasJuegos(juegoP1J2)) {
+							int piedrasJ1 = piedrasJuegos(juegoP1J1)+2;
+							salida.print(piedrasJ1 + " " +piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
+						} else {
+							int piedrasJ2 = piedrasJuegos(juegoP1J2)+2;
+							salida.print(piedrasJuegos(juegoP1J1)+ " " +piedrasJuegos(juegoP2J1)+ " "+ piedrasJ2 + " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
+
+						}
+					} else {
+						piedrasP2 += 2;
+						if (piedrasJuegos(juegoP2J1) > piedrasJuegos(juegoP2J2)) {
+							int piedrasJ3 = piedrasJuegos(juegoP2J1)+2;
+							salida.print(piedrasJuegos(juegoP1J1)+ " " +piedrasJ3+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
+						} else {
+							int piedrasJ4 = piedrasJuegos(juegoP2J2)+2;
+							salida.print(piedrasJuegos(juegoP1J1)+ " " +piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJ4+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
+
+						}
+	
+					}
+				
 	
 					pareja1.addPiedras(piedrasP1);
 					pareja2.addPiedras(piedrasP2);
 					
 		
 	
-					salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 				}	
 
