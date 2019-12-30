@@ -340,7 +340,7 @@ public class Entrada {
 				salida.print(", ");
 				lances.resuelvePares();
 				salida.print(", ");
-				lances.resuelveJuegoComandos();
+				lances.resuelveJuego();
 
 				salida.print("\n");
 				break;
