@@ -650,32 +650,66 @@ public class Lances {
 
 
 			} else {
-				jugMano.getPareja().addPiedras(2);
+				
+				if (juegoP1J1 == 9 && juegoP1J2 == 9 && juegoP2J1 == 9 && juegoP2J2 == 9) {
+					int puntosJ1 = pareja1.getJug1().getMano().getPuntos();
+					int piedrasP1 = 0;
+					int piedrasP2 = 0;
+                    int puntosJ2 = pareja1.getJug1().getMano().getPuntos();
+                    int puntosJ3 = pareja1.getJug1().getMano().getPuntos();
+                    int puntosJ4 = pareja1.getJug1().getMano().getPuntos();
 
-				int piedrasP1 = 0;
+                    if (puntosJ1 > puntosJ3 && puntosJ1 > puntosJ4) {
+                        piedrasP1 = 1;
+                        salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+                    } else if (puntosJ2 > puntosJ3 && puntosJ1 > puntosJ4) {
+                        piedrasP1 = 1;
+                        salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-				piedrasP1 += piedrasJuegos(juegoP1J1);
-				piedrasP1 += piedrasJuegos(juegoP1J2);
+                    } else if (puntosJ3 > puntosJ1 && puntosJ1 > puntosJ2) {
+                        piedrasP2 = 1;
+                        salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-				int piedrasP2 = 0;
-				piedrasP2 += piedrasJuegos(juegoP2J1);
-				piedrasP2 += piedrasJuegos(juegoP2J2);
+                    } else if (puntosJ4 > puntosJ1 && puntosJ1 > puntosJ2) {
+                        piedrasP2 = 1;
+                        salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-				pareja1.addPiedras(piedrasP1);
-				pareja2.addPiedras(piedrasP2);
+                    }
+					pareja1.addPiedras(piedrasP1);
+					pareja2.addPiedras(piedrasP2);
+				
+                }else{
+					
+					jugMano.getPareja().addPiedras(2);
+					int piedrasP1 = 0;
+					int piedrasP2 = 0;
+					if (pareja1.equals(jugMano.getPareja())) {
+						piedrasP1 = 2;
+					} else {
+						piedrasP2 = 2;
+	
+					}
+					piedrasP1 += piedrasJuegos(juegoP1J1);
+					piedrasP1 += piedrasJuegos(juegoP1J2);
+	
+					piedrasP2 += piedrasJuegos(juegoP2J1);
+					piedrasP2 += piedrasJuegos(juegoP2J2);
+	
+					pareja1.addPiedras(piedrasP1);
+					pareja2.addPiedras(piedrasP2);
+					
+		
+	
+					salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
 
-
-
-				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
-
+				}	
 
 			}
 
 		}
 
 
-		salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
-
+	
 
 	}
 
@@ -795,30 +829,67 @@ public class Lances {
 
 
 			} else {
-				jugMano.getPareja().addPiedras(2);
+				if (juegoP1J1 == 9 && juegoP1J2 == 9 && juegoP2J1 == 9 && juegoP2J2 == 9) {
+					int puntosJ1 = pareja1.getJug1().getMano().getPuntos();
+					int piedrasP1 = 0;
+					int piedrasP2 = 0;
+                    int puntosJ2 = pareja1.getJug1().getMano().getPuntos();
+                    int puntosJ3 = pareja1.getJug1().getMano().getPuntos();
+                    int puntosJ4 = pareja1.getJug1().getMano().getPuntos();
 
-				int piedrasP1 = 0;
-				int piedrasP2 = 0;
+                    if (puntosJ1 > puntosJ3 && puntosJ1 > puntosJ4) {
+                        piedrasP1 = 1;
+						
+						salida.print("1 0 0 0 - 1 0");
+                    } else if (puntosJ2 > puntosJ3 && puntosJ1 > puntosJ4) {
+						piedrasP1 = 1;
+						salida.print("0 0 1 0 - 1 0");
 
-				if (pareja1.equals(jugMano.getPareja())) {
-					piedrasP1 = 2;
-				} else {
-					piedrasP2 = 2;
+                    } else if (puntosJ3 > puntosJ1 && puntosJ1 > puntosJ2) {
+                        piedrasP2 = 1;
+						salida.print("0 1 0 0 - 0 1");
+						
+                    } else if (puntosJ4 > puntosJ1 && puntosJ1 > puntosJ2) {
+						piedrasP2 = 1;
+						salida.print("0 0 0 1 - 0 1");
+						
+                    }
+					pareja1.addPiedras(piedrasP1);
+					pareja2.addPiedras(piedrasP2);
+                }else{
 
-				}
+					jugMano.getPareja().addPiedras(2);
+					int piedrasP1 = 0;
+					int piedrasP2 = 0;
+					if (pareja1.equals(jugMano.getPareja())) {
+						piedrasP1 = 2;
+					} else {
+						piedrasP2 = 2;
+	
+					}
+					piedrasP1 += piedrasJuegos(juegoP1J1);
+					piedrasP1 += piedrasJuegos(juegoP1J2);
+	
+					piedrasP2 += piedrasJuegos(juegoP2J1);
+					piedrasP2 += piedrasJuegos(juegoP2J2);
+	
+					pareja1.addPiedras(piedrasP1);
+					pareja2.addPiedras(piedrasP2);
+					
+		
+	
+					salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
-				piedrasP1 += piedrasJuegos(juegoP1J1);
-				piedrasP1 += piedrasJuegos(juegoP1J2);
+				}	
 
-				piedrasP2 += piedrasJuegos(juegoP2J1);
-				piedrasP2 += piedrasJuegos(juegoP2J2);
+				
+				
+				
+				
+				
+			
 
-				pareja1.addPiedras(piedrasP1);
-				pareja2.addPiedras(piedrasP2);
 
-
-
-				salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 			}

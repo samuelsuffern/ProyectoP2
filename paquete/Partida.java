@@ -129,7 +129,11 @@ public class Partida {
 
 		salida.println(pareja1.getEquipo() + ": " + pareja1.getJug1().getNombre() + " y " + pareja1.getJug2().getNombre() + ".");
 		salida.println(pareja2.getEquipo() + ": " + pareja2.getJug1().getNombre() + " y " + pareja2.getJug2().getNombre() + ".");
+<<<<<<< HEAD
 		salida.println("Mano: " + jugMano.getNombre() + ".");
+=======
+		salida.println("Mano: " + jugMano.getNombre() +".");
+>>>>>>> master
 
 		lances.setData(pareja1, pareja2);
 		lances.nextMano(jugMano);
@@ -146,6 +150,7 @@ public class Partida {
 				lances.resuelvePares();
 				salida.print(" ");
 				lances.resuelveJuego();
+				salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
 
 				
 				if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
@@ -196,7 +201,11 @@ public class Partida {
 		generarMano();
 		lances.nextMano(jugMano);
 
+<<<<<<< HEAD
 		salida.println("Mano: " + jugMano.getNombre() + ".");
+=======
+		salida.println("Mano: " + jugMano.getNombre()+".");
+>>>>>>> master
 
 
 		while (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40){
@@ -214,6 +223,7 @@ public class Partida {
 			lances.resuelveChica();
 			lances.resuelvePares();
 			lances.resuelveJuego();
+			salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
 
 			if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
 				generarMano();
