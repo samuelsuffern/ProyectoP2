@@ -146,7 +146,7 @@ public class Partida {
 				lances.resuelvePares();
 				salida.print(" ");
 				lances.resuelveJuego();
-				salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
+				salida.print(" - " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
 
 				
 				if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
@@ -215,7 +215,7 @@ public class Partida {
 			lances.resuelveChica();
 			lances.resuelvePares();
 			lances.resuelveJuego();
-			salida.print("- " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
+			salida.print(" - " + pareja1.getPiedras() + " " + pareja2.getPiedras() + "\n");
 
 			if (pareja1.getPiedras() < 40 && pareja2.getPiedras() < 40) {
 				generarMano();

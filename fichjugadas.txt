@@ -1,6 +1,0 @@
-*(3O, CB, 2B, 1E)-(SB, RE, 4O, 1B)-(7C, 2C, CC, 2O)-(1O, 1C, 4E, 7E)
--(RO, CC, CE, 5B)*(6C, 3O, 6B, 5C)-(SE, 7C, 6O, 2E)-(4O, SC, 5O, RB)
--(4O, 3B, 4B, CB)-(RO, 2C, 4E, 7E)*(5E, 6O, CO, 6E)-(3O, CE, SB, 3C)
--(3C, CE, 7C, RE)-(CC, 1B, 5C, 4E)-(RO, 5E, CO, 5O)*(3O, 1C, SB, 2C)
-*(SB, SO, CC, 6O)-(7E, 1O, 4C, 2B)-(1C, SC, RE, 6E)-(2O, CE, SE, RB)
--(2E, 4O, 6E, RB)*(3C, 4C, RE, 7O)-(CB, 1O, 3E, 3B)-(CE, CC, 3O, 5C)
