@@ -13,3 +13,5 @@ GenerateRandomDelivery 6 1 fichjugadas.txt
 PlayHand -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
 ResolveGrande -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
 ResolveChica -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
+ResolvePares -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)
+ResolveJuego -(6B, SB, 1C, 1O)*(6E, 4O, RO, 3B)-(1E, 2C, 1B, 2E)-(CC, CO, 7E, 7C)

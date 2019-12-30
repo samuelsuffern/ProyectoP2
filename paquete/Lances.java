@@ -513,6 +513,26 @@ public class Lances {
 
 	} // fin resuelvePares()
 
+	public void resuelveParesComandos() {
+		int piedrasP1 = 0;
+		int pJ11 = 0;
+		int pJ12 = 0;
+		int pJ21 = 0;
+		int pJ22 = 0;
+		int piedrasP2 = 0;
+		pJ11 = cuentaPares(pareja1.getJug1().getMano().getBarajaList());
+		piedrasP1 += pJ11;
+		pJ12 = cuentaPares(pareja1.getJug2().getMano().getBarajaList());
+		piedrasP1 += pJ12;
+		pJ21= cuentaPares(pareja2.getJug1().getMano().getBarajaList());
+		piedrasP2 += pJ21;
+		pJ22 = cuentaPares(pareja2.getJug2().getMano().getBarajaList());
+		piedrasP2 += pJ22;
+
+		salida.print(pJ11+ " " +pJ21 + " " + pJ12 + " " + pJ22  +" - "+piedrasP1 + " " + piedrasP2);
+		pareja1.addPiedras(piedrasP1);
+		pareja2.addPiedras(piedrasP2);
+	} // fin resuelvePares()
 
 
 	public void resuelveJuego(){
@@ -688,7 +708,7 @@ public class Lances {
 			pareja2.addPiedras(piedrasP2);
 
 
-			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+			salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 		}else if(juegoP1J2 < juegoP2J1 && juegoP1J2 < juegoP2J2) {
 			int piedrasP1 = 2;
@@ -703,7 +723,7 @@ public class Lances {
 
 			pareja2.addPiedras(piedrasP2);
 
-			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+			salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 
@@ -720,7 +740,7 @@ public class Lances {
 
 			pareja2.addPiedras(piedrasP2);
 
-			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+			salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 		}else if(juegoP2J2 < juegoP1J1 && juegoP2J2 < juegoP1J2) {
@@ -736,7 +756,8 @@ public class Lances {
 
 			pareja2.addPiedras(piedrasP2);
 
-			salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+			salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
+
 
 
 		} else {
@@ -754,7 +775,7 @@ public class Lances {
 
 				pareja2.addPiedras(piedrasP2);
 
-				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+				salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 			} else if (juegoP2J1 + juegoP2J2 < juegoP1J1 + juegoP1J2) {
@@ -770,7 +791,7 @@ public class Lances {
 
 				pareja2.addPiedras(piedrasP2);
 
-				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+				salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 			} else {
@@ -797,7 +818,7 @@ public class Lances {
 
 
 
-				salida.print("Juego " + piedrasP1 + " " + piedrasP2 + " ");
+				salida.print(piedrasJuegos(juegoP1J1)+ " "+piedrasJuegos(juegoP2J1)+ " "+piedrasJuegos(juegoP1J2)+ " "+piedrasJuegos(juegoP2J2)+ " - "+  piedrasP1 + " " + piedrasP2 + " ");
 
 
 			}
